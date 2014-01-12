@@ -1,0 +1,7 @@
+﻿#pragma strict
+
+interface Part
+{
+
+	
+}

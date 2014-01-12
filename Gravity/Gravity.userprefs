@@ -1,0 +1,31 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Server\AccountManager_S.js">
+    <Files>
+      <File FileName="Assets\Scripts\Shared\Player.js" Line="29" Column="2" />
+      <File FileName="Assets\Scripts\Shared\Ship.js" Line="22" Column="41" />
+      <File FileName="Assets\Scripts\Shared\Field.js" Line="177" Column="41" />
+      <File FileName="Assets\Scripts\Shared\NetworkManager.js" Line="74" Column="2" />
+      <File FileName="Assets\Scripts\Shared\PartManager.js" Line="2" Column="32" />
+      <File FileName="Assets\Scripts\Server\AccountManager_S.js" Line="56" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Assembly-UnityScript" expanded="True">
+            <Node name="Scripts" expanded="True">
+              <Node name="Server" expanded="True">
+                <Node name="AccountManager_S.js" selected="True" />
+              </Node>
+              <Node name="Shared" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

@@ -1,0 +1,13 @@
+Password
+Location as Vector3
+
+
+Rotation as Quaternion
+
+
+
+speed
+maxSpeed
+Amount of Components
+ - Component Type
+EOF

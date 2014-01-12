@@ -1,25 +1,130 @@
-\documentclass[8pt,a4paper]{article}
+\documentclass[a4paper]{article}
 \usepackage[a4paper,vmargin={30mm,20mm}]{geometry}
-\usepackage [ngerman,english] {babel}
-\usepackage [utf8] {inputenc}
+\usepackage [ngerman] {babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}	
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage [pdftex] {graphicx}
-\title {Application to the MIT / RSI 2014}
-\author {Fabian Lyck}
+\title {Maturarbeit von Alex Türler und Fabian Lyck}
+\author {Alex Türler, Fabian Lyck}
 \date {\today}
-\begin{document}
 
-\section{"Zusammenfassung"}
-Es geht darum, ein Multiplayer-Spiel zu programmieren, das auf dem Server läuft und somit auch unabhängig davon ist, ob ein Client überhaupt eingeloggt ist. Es spielt im Weltraum und beinhaltet somit Gravitation und Himmelsobjekte. Man selber steuert ein Raumschiff, welches verschiedene Slots besitzt, an denen man Module befestigen kann(zB kann man Antriebe befestigen um das Schiff in verschiedene Richtungen zu beschleunigen, dies ist bereits implementiert, wird jedoch für die Arbeit revidiert). Ein Zusatz wäre eine Scriptsprache, die automatisierte Schiffe ermöglicht. Das Spiel läuft auf der Unity Engine und ist somit 3dimensional.
-\section{"Aufgaben"}
-\subsection{"Klassendesign"}
-\subsection{"Implementierung"}
-\subsection{"Applikationsprotokoll"}
-\subsection{"Dokumentation"}
-\subsection{"Erarbeitung von Theorien"}
-\subsection{"Design GUI"}
-\subsection{"Design 3D"}
-\subsection{"Terminplan"}
-\subsection{"Themen des Maturberichts"}
+\setlength{\parskip}{7mm plus 3mm minus 2mm}
+
+\begin{document}
+\newcommand{\name}[1]{\textsc{#1}}
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+
+\maketitle
+\section{Zusammenfassung}
+Thema dieser Maturarbeit ist die Entwicklung eines serverbasierten Multiplayer-Spiels. Schauplatz ist ein virtuelles, dreidimensionales Sonnensystem, in welchem physikalische Gesetze simuliert werden. Der Spieler steuert ein Raumschiff, welches er individualisieren kann, wie zum Beispiel Antriebe an verschiedenen Stellen befestigen. Wenn möglich soll dem Spieler eine Skriptsprache zur Verfügung stehen, mit der Prozesse automatisiert werden können.
+\section{Aufgaben}
+\subsection{Klassendesign}
+Das Klassendesign ist notwendig zur Implementierung.
+
+
+\name{Fabian}
+
+\subsection{Implementierung}
+
+Die Implementierung des eigentlichen Spiels.
+
+\name{Fabian}
+
+\subsection{Applikationsprotokoll}
+
+Das Applikationsprotokoll beschreibt die Kommunikation zwischen Client und Server.
+
+\name{Fabian}
+
+\subsection{Dateisystem}
+
+Das Dateisystem welches vom Server benutzt wird, um die Informationen über vorhandene Spieler zu speichern.
+
+\name{Fabian}
+
+\subsection{Dokumentation}
+
+Eine Erklärung der verwendeten Funktionen und Klassen inklusive eines Klassendiagramms.
+
+\name{Alex}
+
+\subsection{Erarbeitung von Theorien}
+
+
+\name{Alex, Fabian}
+
+\subsection{Design GUI}
+Die GUI ist das Interface des Spielers.
+
+\name{Alex}
+
+\subsection{Design 3D}
+Hierbei handelt es sich um das Design von dreidimensionalen Objekten, die im Spiel vorkommen.
+
+\name{Alex}
+
+\subsection{Terminplan}
+Der Terminplan muss von Beiden regelmässig nachgeführt werden, um Verzögerungen rechtzeitig zu erkennen.
+
+\name{Alex}
+
+\subsection{Themen des Maturberichts}
+
+\begin{enumerate}
+  \item Introduction
+  \begin{enumerate}
+    \item Vorwort
+    \item Ideas
+    \item Der Vorgänger
+    \item Versioning
+    \item 
+    \item 
+  \end{enumerate}
+  \item Implementation
+  \begin{enumerate}
+    \item Engine, Language, Environment
+    \item Program Execution
+    \item Gravitationsberechnung
+    \item 
+    \item 
+  \end{enumerate}
+  \item Application Design
+  \begin{enumerate}
+    \item Class Diagram
+    \item Server/Client RPCs
+    \item 
+    \item 
+  \end{enumerate}
+  \item Graphic Design
+  \begin{enumerate}
+    \item Modeling
+    \item Texturing
+    \item Rendering
+    \item GUI
+    \item 
+    \item 
+  \end{enumerate}
+  \item Testing
+  \begin{enumerate}
+    \item Einleitung
+    \item Tests
+    \item 
+    \item 
+  \end{enumerate}
+  \item Attachments
+  \begin{enumerate}
+    \item Documentation
+    \item Schedule
+    \item Sourcecode
+    \item References
+    \item 
+    \item 
+  \end{enumerate}
+\end{enumerate}
+
+\subsection{Versionsverwaltung}
+Zur Versionsverwaltung wird voraussichtlich git benutzt.
 
 \end{document}

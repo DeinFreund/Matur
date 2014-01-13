@@ -1,17 +1,26 @@
-<1foo>
-<2bar>
-	 <3foo>
-=barfoo  	
-	</3foo>
-<3bar>	
-=foofoo
-</3bar>
-</2bar>  
-</1foo>
-<1bar>
-  <2bar>
-<3foo>	
-  =foobar
-</3foo>
-</2bar>
-</1bar>
+	<foo>
+		<bar>
+			<foo>
+				<foo>
+					<bar>
+						=yay
+					</bar>
+				</foo>
+			</foo>
+		</bar>
+	</foo>
+	<2bar>
+		<3foo>
+			=barfoo
+		</3foo>
+		<3bar>
+			=foofoo
+		</3bar>
+	</2bar>
+	<1bar>
+		<2bar>
+			<3foo>
+				=foobar
+			</3foo>
+		</2bar>
+	</1bar>

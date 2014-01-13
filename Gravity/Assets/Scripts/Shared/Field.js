@@ -36,13 +36,18 @@ public class Field//handles section of files
 					//#Debug.Log("Found <" + name + ">");
 					//#Debug.Log("Looking for " + String.Format("</{0}>",name) );
 					
-					line++;
-					while(content[line] != String.Format("</{0}>",name)){
-						//#Debug.Log(content[line]);
-						fieldContent.Add(content[line]);
+					var depth : int = 1;
+					while(depth > 0 ){
 						line ++;
+						if (line >= content.Count) Debug.LogError("Index out of range: " + line + "/" + content.Count);
+						if (content[line] == String.Format("</{0}>",name)) depth --;
+						if (content[line] == String.Format("<{0}>",name)) depth ++;
+						if (depth > 0) fieldContent.Add(content[line]);
+						//#Debug.Log(content[line]);
+						//#Debug.Log(depth);
 					}
 					
+										
 					//#Debug.Log("End: " + content[line]);
 					fields.Add(new Field(fieldContent));
 					names.Add(name);

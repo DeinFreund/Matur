@@ -34,7 +34,6 @@ static function WriteFile(path : String, data : String[])
 static function ReadFile(path : String): String[] {
 
 	if (!System.IO.File.Exists(path)) return new String[0];
-	
     var sr: StreamReader = new StreamReader(path);
  	var data: List.<String>  = new List.<String>();
     var input:String = "";

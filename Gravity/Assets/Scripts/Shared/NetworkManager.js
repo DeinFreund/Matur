@@ -51,14 +51,18 @@ private var authenticated:boolean = false;
 function Start () {
 	
 	var f : Field = new Field(new List.<String>(FileIO.ReadFile("test.txt")));
-	Debug.Log(f.getField("1foo").getFields("2bar")[0].getField("3foo").getValue());
+	Debug.Log(f.getField("foo"));
+	var sf : Field = f.getField("foo").getFields("bar")[0];
+	Debug.Log(sf.getField("foo").getField("foo").getField("bar").getValue());
+	FileIO.WriteFile("test.txt",f.getContent().ToArray());
+	
 	
 	var l : List.<String> = new List.<String>();
 	l.Add("=blib");
 	Debug.Log(f.getField("1foo").getFields("2bar")[0].addField("3blub",l).getValue());
 	Debug.Log(f.getField("1foo").getFields("2bar")[0].getField("3blub").getValue());
-	var v : Field = new Field();
-	v.addField("Masterblub");
+	var v : Field = new Field(); 
+	v.addField("Masterblub"); 
 	v.getField("Masterblub").addField("blub").setValue("blubsson");
 	v.getField("Masterblub").addField("blib").setValue("blibsson");
 	v.addField("otherblub").setValue("unimportant");

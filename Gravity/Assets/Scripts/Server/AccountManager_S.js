@@ -1,5 +1,5 @@
 ﻿#pragma strict
-
+/*
 var playerPrefab:GameObject;
 var spawn:Transform;
 var playerFilepath:String="clients/";
@@ -121,12 +121,12 @@ function LoadPlayer(name:String) : GameObject{
 	
 	return player;
 }
-
+*/
 function LoadPlayers(){
 	
-	var playerlist:String[] = FileIO.ReadFile(playerlistFilepath);
+	/*var playerlist:String[] = FileIO.ReadFile(playerlistFilepath);
 	for (var player:String in playerlist){
 		LoadPlayer(player);
 	}
-	Debug.Log("All Players loaded.");
+	Debug.Log("All Players loaded.");*/
 }

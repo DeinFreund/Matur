@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}	
 \usepackage{amsmath,amsfonts,amssymb}
+\usepackage{hyperref}
 \usepackage [pdftex] {graphicx}
 \title {Maturarbeit von Alex Türler und Fabian Lyck}
 \author {Alex Türler, Fabian Lyck}
@@ -19,57 +20,65 @@
 \maketitle
 \section{Zusammenfassung}
 Thema dieser Maturarbeit ist die Entwicklung eines serverbasierten Multiplayer-Spiels. Schauplatz ist ein virtuelles, dreidimensionales Sonnensystem, in welchem physikalische Gesetze simuliert werden. Der Spieler steuert ein Raumschiff, welches er individualisieren kann, wie zum Beispiel Antriebe an verschiedenen Stellen befestigen. Wenn möglich soll dem Spieler eine Skriptsprache zur Verfügung stehen, mit der Prozesse automatisiert werden können.
+
+
+
 \section{Aufgaben}
 \subsection{Klassendesign}
-Das Klassendesign ist notwendig zur Implementierung.
+Das Klassendesign umfasst die Definition von Variablen und Klassen sowie deren Verwendung. Vor der eigentlichen Implementation müssen hier die Details festgelegt werden.  Bei Unity muss man darauf achten, dass alle Klassen, die Teil eines Unity GameObjects sind, von MonoBehaviour erben.
 
-
-\name{Fabian}
+Zuständig: \name{Fabian}
 
 \subsection{Implementierung}
 
-Die Implementierung des eigentlichen Spiels.
+Bei der Implementierung handelt es sich um die gesamte Programmierarbeit, welche sich nach dem Klassendesign und Applikationsprotokoll richtet. Der Code wird vorraussichtlich in UnityJavaScript geschrieben.
 
-\name{Fabian}
+Zuständig: \name{Fabian}
 
 \subsection{Applikationsprotokoll}
 
-Das Applikationsprotokoll beschreibt die Kommunikation zwischen Client und Server.
+Das Applikationsprotokoll beschreibt die Kommunikation zwischen Client und Server und beinhaltet bestimmte Kommunikationscodes. Diese Kommunikation besteht in diesem Fall grösstenteils aus Remote Procedure Calls. Unsere Arbeit besteht daraus, diese Liste zu erstellen und die Hintergründe zu erklären.
 
-\name{Fabian}
+Zuständig: \name{Fabian}
 
 \subsection{Dateisystem}
 
-Das Dateisystem welches vom Server benutzt wird, um die Informationen über vorhandene Spieler zu speichern.
+Das Dateisystem welches vom Server benutzt wird, um die Informationen über vorhandene Spieler zu speichern, ebenfalls können damit Einstellungen des aktuellen Spielers gespeichert werden. Die Syntax ähnelt lua. Dafür wird im Projekt eine Klasse erstellt.
 
-\name{Fabian}
+Zuständig: \name{Fabian}
 
 \subsection{Dokumentation}
 
-Eine Erklärung der verwendeten Funktionen und Klassen inklusive eines Klassendiagramms.
+Eine Erklärung der verwendeten Funktionen und Klassen inklusive eines Klassendiagramms. Sie wird in Form eines Javadocs erstellt.
 
-\name{Alex}
+Zuständig: \name{Alex}
 
 \subsection{Erarbeitung von Theorien}
-Die Beschreibung von Theorien in der Maturarbeit, die zum Lösen von Problemen nötig waren. 
 
-\name{Alex, Fabian}
+Wir beschreiben die Theorien welche in der Maturarbeit zum Lösen von Problemen nötig sind. Zum Beispiel die Gravitationsberechnung bzw. -approximation, bestenfalls mit einem Octtree, oder auch die Projektion von dreidimensionalen Objekten auf eine zweidimensionale Textur.
+
+Zuständig: \name{Alex, Fabian}
 
 \subsection{Design GUI}
-Die GUI ist das Interface des Spielers.
+Die GUI ist das Interface des Spielers, bei dieser gilt es darauf zu achten, dass Sie übersichtlich und verständlich bleibt, ohne jedoch an Funktionen einzubüssen. Die Arbeit besteht hier aus zwei Teilen, zuerst muss eine Skizze erstellt werden, danach eine passende GUI implementiert werden.
 
-\name{Alex}
+Zuständig: \name{Alex, Fabian}
 
 \subsection{Design 3D}
-Hierbei handelt es sich um das Design von dreidimensionalen Objekten, die im Spiel vorkommen.
+Hierbei handelt es sich um das Design von dreidimensionalen Objekten, die im Spiel vorkommen. Darunter fallen Raumschiffe, Planeten und Asteroiden. Dies besteht aus der Modellierung und Texturierung der Objekte.
 
-\name{Alex}
+Zuständig: \name{Alex}
+
+\subsection{Testing}
+Ein ausführliches Testen der Software ist in jedem Stadium nötig. Dies verhindert spätere Probleme mit Programmierfehlern, die zu spät erkannt werden. Ebenso dient es der Qualitätssicherung. Es wird ein Plan mit nötigen Tests sowie deren Ausführungsweise erstellt und daraufhin durchgeführt.
+
+Zuständig: \name{Alex}
 
 \subsection{Terminplan}
-Der Terminplan muss von Beiden regelmässig nachgeführt werden, um Verzögerungen rechtzeitig zu erkennen.
+Der Terminplan muss von Beiden regelmässig nachgeführt werden, um Verzögerungen rechtzeitig zu erkennen. Der voraussichtliche Plan ist diesem Text angehängt.
 
-
-\subsection{Themen des Maturberichts}
+Zuständig:  \name{Alex, Fabian}
+\subsection{Vorläufige Themen des Maturberichts}
 
 \begin{enumerate}
   \item Introduction
@@ -124,6 +133,6 @@ Der Terminplan muss von Beiden regelmässig nachgeführt werden, um Verzögerung
 \end{enumerate}
 
 \subsection{Versionsverwaltung}
-Zur Versionsverwaltung wird voraussichtlich git benutzt.
+Zur Versionsverwaltung wird git benutzt. Dies verhindert Versionskonflikte mit verschiedenen Versionen in der Schule und daheim. Im Moment ist das Projektverzeichnis einzusehen unter \url{https://github.com/DeinFreund/Matur}. Dieses wird nur als Arbeitsverzeichnis genutzt.
 
 \end{document}

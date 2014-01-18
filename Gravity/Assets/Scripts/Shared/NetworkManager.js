@@ -50,27 +50,7 @@ private var authenticated:boolean = false;
 
 function Start () {
 	
-	var f : Field = new Field(new List.<String>(FileIO.ReadFile("test.txt")));
-	Debug.Log(f.getField("foo"));
-	var sf : Field = f.getField("foo").getFields("bar")[0];
-	Debug.Log(sf.getField("foo").getField("foo").getField("bar").getValue());
-	FileIO.WriteFile("test.txt",f.getContent().ToArray());
 	
-	
-	var l : List.<String> = new List.<String>();
-	l.Add("=blib");
-	Debug.Log(f.getField("1foo").getFields("2bar")[0].addField("3blub",l).getValue());
-	Debug.Log(f.getField("1foo").getFields("2bar")[0].getField("3blub").getValue());
-	var v : Field = new Field(); 
-	v.addField("Masterblub"); 
-	v.getField("Masterblub").addField("blub").setValue("blubsson");
-	v.getField("Masterblub").addField("blib").setValue("blibsson");
-	v.addField("otherblub").setValue("unimportant");
-	f.getField("1bar").addField("newb",v.getContent());
-	Debug.Log(f.getField("1bar").getField("newb").getField("Masterblub").getField("blib").getValue());
-	Debug.Log(f.getField("1bar").getField("newb").getField("otherblub").getValue());
-	
-	FileIO.WriteFile("test2.txt",f.getContent().ToArray());
 	if (useNAT) Debug.LogError("NAT throughpunch is not (yet) implemented.");
 }
 
@@ -99,7 +79,7 @@ function OnGUI(){
 			if (GUI.Button (new Rect(btnRegisterX,btnRegisterY,btnRegisterW,btnRegisterH),"Register"))
 			{
 				alertTime = -1;
-				Debug.Log("Registering in with username: " + username + " Password:" + password);
+				Debug.Log("Registering with username: " + username + " Password:" + password);
 				networkView.RPC("Register",RPCMode.Server,Network.player,username,password);
 				
 			}
@@ -115,12 +95,14 @@ function OnGUI(){
 		{
 			Debug.Log("Connecting to Server @ " + netIP + ":" + netPort);
 			Network.Connect(netIP, netPort);
+			Presets.init();
 			
 		}
 		if (GUI.Button (new Rect(btnNetworkHostX,btnNetworkHostY,btnNetworkHostW,btnNetworkHostH),"Start Server"))
 		{	
 			Network.InitializeServer(32, netPort, useNAT);
 			Debug.Log("Hosting Server");
+			Presets.init();
 			GetComponent(AccountManager_S).LoadPlayers();
 			
 			for (var go : GameObject in FindObjectsOfType(GameObject))

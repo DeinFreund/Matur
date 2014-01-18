@@ -18,6 +18,7 @@ static function AttachFile(path : String, data : String[])
     WriteFile(path,res);
 }
 
+static function WriteFile(path : String, data : List.<String>){ WriteFile(path,data.ToArray()); }
 static function WriteFile(path : String, data : String[])
 {
 
@@ -84,15 +85,4 @@ static function setQuaternion(data : String[], startindex:int, val:Quaternion){
 	data[startindex+1] = val.y.ToString();
 	data[startindex+2] = val.z.ToString();
 	data[startindex+3] = val.w.ToString();
-}
-
-function Test(){
-	
-	
-	var data:String[] = new String[3];
-	data[0] = "test";
-	data[1] = "hallo";
-	data[2] = "bb";
-	WriteFile("test.txt",data);
-	Debug.Log(ReadFile("test.txt")[2]);
 }

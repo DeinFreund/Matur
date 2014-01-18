@@ -1,6 +1,6 @@
 ﻿#pragma strict
 
-
+//OBSOLETE
 //SERVER
 
 

@@ -21,7 +21,7 @@ function OnNetworkLoadedLevel () {
 function Update () {
 
 	if (transform.parent == null) {
-		this.enabled = false;//th	eres no engine without ship
+		this.enabled = false;//theres no engine without ship
 		return;	
 	}
 	

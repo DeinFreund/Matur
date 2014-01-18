@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\Server\CannonTurretComponent_S.js" />
      <Compile Include="Assets\Scripts\Server\ComponentManager_S.js" />
      <Compile Include="Assets\Scripts\Server\EngineComponent_S.js" />
+     <Compile Include="Assets\Scripts\Server\Player.js" />
      <Compile Include="Assets\Scripts\Server\PlayerManager_S.js" />
      <Compile Include="Assets\Scripts\Shared\Field.js" />
      <Compile Include="Assets\Scripts\Shared\FileIO.js" />
@@ -66,7 +67,8 @@
      <Compile Include="Assets\Scripts\Shared\NetworkManager.js" />
      <Compile Include="Assets\Scripts\Shared\Part.js" />
      <Compile Include="Assets\Scripts\Shared\PartManager.js" />
-     <Compile Include="Assets\Scripts\Shared\Player.js" />
+     <Compile Include="Assets\Scripts\Shared\Prefabs.js" />
+     <Compile Include="Assets\Scripts\Shared\Presets.js" />
      <Compile Include="Assets\Scripts\Shared\Ship.js" />
      <Compile Include="Assets\Scripts\Shared\Structs\MinimalUser.js" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />

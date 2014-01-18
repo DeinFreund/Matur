@@ -1,5 +1,5 @@
 ﻿#pragma strict
-//"handles" a gameObject thus should be seen as owner instead of the gameobject itself
+
 
 static var shipPrefabs : Transform[];
 
@@ -8,11 +8,13 @@ public class Ship extends MonoBehaviour{
 	private var owner : Player;
 	private var partManager : PartManager;
 	private var data : Field;
+	private var main : boolean;
 	
 	public static function newShip(owner : Player, data : Field) : Ship{
 		
 		var pos : Vector3 = new Vector3(0,0,0);
 		var rot : Quaternion = new Quaternion(0,0,0,0);
+		
 		var prefab : Transform;
 		prefab = shipPrefabs[parseInt(data.getField("shipPrefab").getValue())];
 		var targetObject : GameObject = Network.Instantiate(prefab,pos,rot,NetworkGroup.PLAYER).gameObject;
@@ -20,7 +22,29 @@ public class Ship extends MonoBehaviour{
 		thisObj.owner = owner;
 		thisObj.data = data;
 		thisObj.partManager = new PartManager.newPartManager(thisObj,data.getField("parts"));
+		thisObj.main = data.atField("main").getBoolean();
 		return thisObj;
+	}
+	
+	function Update(){
+		if (Network.isClient) Update_C();
+		if (Network.isServer) Update_S();
+		
+	}
+	
+	function Update_S(){
+		
+	}
+	
+	function Unload(){
+		Network.Destroy(gameObject);
+		
+	}
+	
+	function setMain(val : boolean){
+		main = val;
+		data.atField("main").setBoolean(val);
+		Debug.Log("Set " + owner.getUsername() +"'s ship as main ship: " + data.getField("main").getBoolean());
 	}
 	
 	function getTransform() : Transform {
@@ -34,5 +58,23 @@ public class Ship extends MonoBehaviour{
 	function getOwner() : Player {
 		
 		return owner;
+	}
+	
+	function OnOwnerConnected(){
+		networkView.RPC("Enable",owner.getNetworkPlayer());
+	}
+	
+	//////////
+	//CLIENT//
+	//////////
+	
+	function Update_C(){
+		
+	}
+	
+	@RPC
+	function Enable(){
+		Debug.Log("clientsided controls on ship enabled");
+		Camera.main.GetComponent(MouseOrbit).target = transform;
 	}
 }

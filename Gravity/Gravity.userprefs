@@ -1,14 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Shared\Ship.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Shared\Parts\Engine.js">
     <Files>
-      <File FileName="Assets\Scripts\Server\Player.js" Line="9" Column="26" />
-      <File FileName="Assets\Scripts\Server\AccountManager_S.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Shared\Presets.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Shared\NetworkManager.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Shared\FileIO.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Shared\Ship.js" Line="4" Column="25" />
-      <File FileName="Assets\Scripts\Shared\Field.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Shared\PartManager.js" Line="33" Column="19" />
+      <File FileName="Assets\Scripts\Shared\Ship.js" Line="28" Column="2" />
+      <File FileName="Assets\Scripts\Shared\Parts\Part.js" Line="5" Column="1" />
+      <File FileName="Assets\Scripts\Shared\Parts\Engine.js" Line="73" Column="3" />
+      <File FileName="Assets\Scripts\Server\EngineComponent_S.js" Line="31" Column="160" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

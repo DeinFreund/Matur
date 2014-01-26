@@ -159,7 +159,6 @@ public class Field//handles section of files
 	}
 	public function addField(name : String) : Field{
 	
-		Debug.Log(id+  " added field " + name);
 		fields.Add(new Field());
 		names.Add(name);
 		return fields[fields.Count - 1];

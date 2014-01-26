@@ -17,10 +17,38 @@ Platform assembly: C:\Users\User\Documents\matur\Gravity\gravity2_Data\Managed\A
 Loading C:\Users\User\Documents\matur\Gravity\gravity2_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
 Platform assembly: C:\Users\User\Documents\matur\Gravity\gravity2_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
 Loading C:\Users\User\Documents\matur\Gravity\gravity2_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
-- Completed reload, in  0.041 seconds
+- Completed reload, in  0.043 seconds
 desktop: 1680x1050 60Hz; virtual: 1680x1050 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 Platform assembly: C:\Users\User\Documents\matur\Gravity\gravity2_Data\Managed\UnityScript.Lang.dll (this message is harmless)
 Platform assembly: C:\Users\User\Documents\matur\Gravity\gravity2_Data\Managed\Boo.Lang.dll (this message is harmless)
 Platform assembly: C:\Users\User\Documents\matur\Gravity\gravity2_Data\Managed\System.Core.dll (this message is harmless)
+Hosting Server
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Creating player df
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+3|2
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+3|2
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+All Players loaded.
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Unloading player df
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+All Players unloaded.
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+

@@ -31,8 +31,11 @@ function Login(player:NetworkPlayer, name:String, psw:String){
 		
 		for (var go : GameObject in FindObjectsOfType(GameObject))
 		{
-			//go.SendMessage("OnClientConnected", player,SendMessageOptions.DontRequireReceiver); obsolete
 			go.SendMessage("OnUserConnected", new MinimalUser(player, name), SendMessageOptions.DontRequireReceiver); 
+		}
+		for (var p : Player in players)
+		{
+			p.OnUserConnected(new MinimalUser(player, name));
 		}
 	}else{
 		Debug.Log("Login request rejected - Wrong password or username");

@@ -1,7 +1,7 @@
 ﻿#pragma strict
-//is attached by script to ship
+//is attached by constructor to ship
 
-var componentPrefabs:Transform[];
+static var componentPrefabs:Transform[];
 var componentSpawns:Transform[];
 
 public class PartManager extends MonoBehaviour
@@ -15,25 +15,59 @@ public class PartManager extends MonoBehaviour
 		var thisObj : PartManager = ship.getGameObject().AddComponent(PartManager);
 		thisObj.ship = ship;
 		thisObj.data = data;
+		var childSpawns : List.<Transform> = new List.<Transform>();
+		for (var child : Transform in thisObj.transform)
+		{
+			if (child.tag=="ComponentSpawn"){
+				childSpawns.Add(child);
+			}
+		}
+		thisObj.componentSpawns = childSpawns.ToArray();
+		
+		thisObj.parseParts();
 		return thisObj;
 	}
 	
-	//dirty file parsing
+	function addPart(part : Part, slot : int){
+		
+		for (var field : Field in data.getFields("part")){
+			if (slot > 0 && field.getField("slot").getInt() == slot){
+				Debug.LogWarning("Tried to add part at non-empty slot");
+				return;
+			}
+		}
+		var field:Field = data.addField("part");
+		field.addField("type").setInt(part.getType());
+		field.addField("slot").setInt(slot);
+		loadPart(field);
+	}
+	
+	function loadPart(field : Field){
+		var type : int = field.getField("type").getInt();
+		var slot : int = field.getField("slot").getInt();
+		Debug.Log(componentPrefabs.Length + "|" + componentSpawns.Length);
+		var object:GameObject = Network.Instantiate(componentPrefabs[type].gameObject,
+			componentSpawns[slot].position,
+			Quaternion.Euler(componentPrefabs[type].transform.rotation.eulerAngles + componentSpawns[slot].rotation.eulerAngles),
+			NetworkGroup.COMPONENT);
+		
+		object.transform.parent = ship.getTransform();
+		networkView.RPC("SetPartParent",RPCMode.OthersBuffered,object.networkView.viewID);
+	}
+	
 	function parseParts() {
 	
-		for (var field : Field in data.getFields("Ship")){
-			var type : int = parseInt(field.getField("type").getValue());
-			var slot : int = parseInt(field.getField("slot").getValue());
-			//if (type < 1) continue;//if there's no part at the current slot jump to next slot
-			//else instantiate the part
-			var object:GameObject = Network.Instantiate(componentPrefabs[type].gameObject,
-				componentSpawns[slot].position,
-				Quaternion.Euler(componentPrefabs[type].transform.rotation.eulerAngles + componentSpawns[slot].rotation.eulerAngles),
-				NetworkGroup.COMPONENT);
-			
-			object.transform.parent = ship.getTransform();
-			object.SendMessage("SetOwner",ship.getOwner());
-			networkView.RPC("SetPartParent",RPCMode.OthersBuffered,object.networkView.viewID);
+		for (var field : Field in data.getFields("part")){
+			loadPart(field);
+		}
+	}
+	
+	@RPC
+	function SetPartParent(childId : NetworkViewID){
+		for (var go : GameObject in FindObjectsOfType(GameObject)){
+			if (go.networkView != null && go.networkView.viewID == childId){
+				go.transform.parent = transform;
+			}
 		}
 	}
 	

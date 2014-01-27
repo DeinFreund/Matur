@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\Client\EngineLight.js" />
      <Compile Include="Assets\Scripts\Client\FlareBrightness.js" />
      <Compile Include="Assets\Scripts\Client\PlayerManager_C.js" />
+     <Compile Include="Assets\Scripts\Client\Window.js" />
      <Compile Include="Assets\Scripts\Gravity.js" />
      <Compile Include="Assets\Scripts\Server\AccountManager_S.js" />
      <Compile Include="Assets\Scripts\Server\CannonTurretComponent_S.js" />
@@ -65,8 +66,10 @@
      <Compile Include="Assets\Scripts\Shared\Freeze.js" />
      <Compile Include="Assets\Scripts\Shared\NetworkGroup.js" />
      <Compile Include="Assets\Scripts\Shared\NetworkManager.js" />
-     <Compile Include="Assets\Scripts\Shared\Part.js" />
      <Compile Include="Assets\Scripts\Shared\PartManager.js" />
+     <Compile Include="Assets\Scripts\Shared\Parts\Cannon.js" />
+     <Compile Include="Assets\Scripts\Shared\Parts\Engine.js" />
+     <Compile Include="Assets\Scripts\Shared\Parts\Part.js" />
      <Compile Include="Assets\Scripts\Shared\Prefabs.js" />
      <Compile Include="Assets\Scripts\Shared\Presets.js" />
      <Compile Include="Assets\Scripts\Shared\Ship.js" />

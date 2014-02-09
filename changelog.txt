@@ -1,5 +1,16 @@
+ - 9 Feb 2014
++removed old dependencies to load parts(i.e engine) on clientside and replaced by ShipClient
++fixed Window class and engine gui and added guiskin
++fixed particle system and light for engine
++added shader to simulate camera sensitivity(exposure) and added script to do auto exposure
++added antialiasing and bloom shaders by TheBlur(FuzzyQuills) and Tryder (see: http://forum.unity3d.com/threads/198568-Epic-Radial-Blur-Effect-for-Unity-Indie)
+-gui needed for graphic settings
+
  - 27 Jan 2014
-+implemented loading and saving of parts
++implemented loading, saving and adding of parts (adding yet untested)
 +Engine module partially working
 +fixed login bugs, ships and players are being loaded and saved
++camera can switch to telescope mode(changing fov instead of distance to ship)
+-camera controls should be refined
 -gui for engine/window class not working
+-particle system for engine not changing depending on acceleration

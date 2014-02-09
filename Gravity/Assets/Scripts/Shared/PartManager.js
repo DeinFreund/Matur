@@ -62,13 +62,5 @@ public class PartManager extends MonoBehaviour
 		}
 	}
 	
-	@RPC
-	function SetPartParent(childId : NetworkViewID){
-		for (var go : GameObject in FindObjectsOfType(GameObject)){
-			if (go.networkView != null && go.networkView.viewID == childId){
-				go.transform.parent = transform;
-			}
-		}
-	}
 	
 }

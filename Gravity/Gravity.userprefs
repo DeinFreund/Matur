@@ -1,12 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Shared\Parts\Engine.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Shared\PartManager.js">
     <Files>
-      <File FileName="Assets\Scripts\Shared\PartManager.js" Line="33" Column="19" />
-      <File FileName="Assets\Scripts\Shared\Ship.js" Line="28" Column="2" />
-      <File FileName="Assets\Scripts\Shared\Parts\Part.js" Line="5" Column="1" />
-      <File FileName="Assets\Scripts\Shared\Parts\Engine.js" Line="73" Column="3" />
-      <File FileName="Assets\Scripts\Server\EngineComponent_S.js" Line="31" Column="160" />
+      <File FileName="Assets\Scripts\Client\ShipClient.js" Line="25" Column="23" />
+      <File FileName="Assets\Scripts\Shared\PartManager.js" Line="34" Column="35" />
+      <File FileName="Assets\Scripts\Server\Ship.js" Line="29" Column="20" />
+      <File FileName="Assets\Scripts\Shared\Parts\Engine.js" Line="78" Column="4" />
+      <File FileName="Assets\Scripts\Client\EngineLight.js" Line="15" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

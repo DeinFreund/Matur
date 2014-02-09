@@ -47,8 +47,30 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\MoveCamera.cs" />
+     <None Include="Assets\ImageEffects\ShaderDir\ColorBalance.shader" />
+     <None Include="Assets\ImageEffects\AA Shaders\FXAA3Console.shader" />
+     <None Include="Assets\ImageEffects\ShaderDir\MobileBloom.shader" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
+     <None Include="Assets\ImageEffects\ShaderDir\BloomShader.shader" />
+     <None Include="Assets\ImageEffects\ShaderDir\FisheyeShader.shader" />
+     <None Include="Assets\ImageEffects\DepthTexture.shader" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
+     <None Include="Assets\ImageEffects\AA Shaders\FXAA2.shader" />
+     <None Include="Assets\ImageEffects\AA Shaders\FXAAPreset2.shader" />
+     <None Include="Assets\ImageEffects\ShaderDir\Vignette.shader" />
+     <None Include="Assets\ImageEffects\ShaderDir\StarBloom.shader" />
+     <None Include="Assets\ImageEffects\ShaderDir\MotionBlurAlphaBlended.shader" />
+     <None Include="Assets\ImageEffects\AA Shaders\FXAAPreset3.shader" />
+     <None Include="Assets\ImageEffects\AA Shaders\SSAA.shader" />
+     <None Include="Assets\ImageEffects\ShaderDir\negative.shader" />
+     <None Include="Assets\ImageEffects\ShaderDir\DOFShader.shader" />
+     <None Include="Assets\ImageEffects\ShaderDir\Shadow-ScreenBlur.shader" />
+     <None Include="Assets\ImageEffects\ShaderDir\IndieRadialBlur.shader" />
+     <None Include="Assets\ImageEffects\ShaderDir\ExposureShader.shader" />
+     <None Include="Assets\ImageEffects\ShaderDir\BlurShader.shader" />
+     <None Include="Assets\ImageEffects\ShaderDir\GodRays.shader" />
+     <None Include="Assets\ImageEffects\AA Shaders\DLAA.shader" />
+     <None Include="Assets\ImageEffects\AA Shaders\NFAA.shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>

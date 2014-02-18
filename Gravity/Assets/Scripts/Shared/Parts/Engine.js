@@ -19,6 +19,7 @@ class Engine extends MonoBehaviour implements Part
 	//////////
 	
 	private var client : NetworkPlayer;
+	private var data : Field;
 	
 	function OnUserConnected(user : MinimalUser){
 		if (!transform.parent.GetComponent(Ship).getOwner().getUsername().ToUpper() == user.name.ToUpper()) return;
@@ -37,6 +38,19 @@ class Engine extends MonoBehaviour implements Part
 	function Update_S(){
 		if (!transform.parent) return;
 		transform.parent.rigidbody.AddForceAtPosition(transform.forward * 1 *  accel * maxAccel * Time.deltaTime,transform.localPosition + transform.parent.position);
+		
+	}
+	
+	function LoadPart(field : Field){
+		Debug.Log(field.getId());
+		this.accel = field.getField("accel").getFloat();
+		this.data = field;
+	}
+	
+	function Unload(){
+		data.getField("accel").setFloat(accel);
+		
+		Network.Destroy(networkView.viewID);
 		
 	}
 	

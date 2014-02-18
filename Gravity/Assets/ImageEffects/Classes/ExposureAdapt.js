@@ -52,7 +52,7 @@ function adaptExposure(){
 		}
 	}
 	avgLum /= samples;
-	Debug.Log(avgLum);
+	//Debug.Log(avgLum);
 	if (Mathf.Max(avgLum,targetLuminance) / Mathf.Min(avgLum,targetLuminance) > maxSpeed){
 		if (avgLum < targetLuminance) compensate = maxSpeed;
 		if (avgLum > targetLuminance) compensate = 1.0 / maxSpeed;

@@ -7,18 +7,22 @@ var componentSpawns:Transform[];
 public class PartManager extends MonoBehaviour
 {
 
-	private var ship : Ship;
+	private var parentgo : GameObject;
 	private var data : Field;
 	
-	public static function newPartManager(ship : Ship, data : Field) : PartManager{
+	private var parts : List.<GameObject>;
+	
+	public static function newPartManager(parentgo : GameObject, data : Field) : PartManager{
 		
-		var thisObj : PartManager = ship.getGameObject().AddComponent(PartManager);
-		thisObj.ship = ship;
+		var thisObj : PartManager = parentgo.AddComponent(PartManager);
+		thisObj.parentgo = parentgo;
 		thisObj.data = data;
+		thisObj.parts = new List.<GameObject>();
 		var childSpawns : List.<Transform> = new List.<Transform>();
 		for (var child : Transform in thisObj.transform)
 		{
 			if (child.tag=="ComponentSpawn"){
+				//Debug.Log(child);
 				childSpawns.Add(child);
 			}
 		}
@@ -45,20 +49,37 @@ public class PartManager extends MonoBehaviour
 	function loadPart(field : Field){
 		var type : int = field.getField("type").getInt();
 		var slot : int = field.getField("slot").getInt();
-		Debug.Log(componentPrefabs.Length + "|" + componentSpawns.Length);
+		//Debug.Log(componentPrefabs.Length + "|" + componentSpawns.Length);
+		Debug.Log("Spawning part of type " + type + " / " + componentPrefabs.Length + " at slot " + slot + " / " + componentSpawns.Length);
+		Debug.Log(componentPrefabs[type].transform.eulerAngles.x+" " +componentPrefabs[type].transform.eulerAngles.y + " " + componentPrefabs[type].transform.rotation.eulerAngles.z);
 		var object:GameObject = Network.Instantiate(componentPrefabs[type].gameObject,
 			componentSpawns[slot].position,
-			Quaternion.Euler(componentPrefabs[type].transform.rotation.eulerAngles + componentSpawns[slot].rotation.eulerAngles),
+			Quaternion.Euler(componentPrefabs[type].transform.rotation.eulerAngles + componentSpawns[slot].GetComponent(SpawnRotation).rot),
 			NetworkGroup.COMPONENT);
 		
-		object.transform.parent = ship.getTransform();
+		object.transform.parent = parentgo.transform;
 		networkView.RPC("SetPartParent",RPCMode.OthersBuffered,object.networkView.viewID);
+		object.SendMessage("LoadPart",field.getField("data"));
+		//Debug.Log(object);
+		parts.Add(object);
+	}
+	
+	function unloadPart(go : GameObject){
+		go.SendMessage("Unload");
+		
+			
 	}
 	
 	function parseParts() {
 	
 		for (var field : Field in data.getFields("part")){
 			loadPart(field);
+		}
+	}
+	
+	function Unload(){
+		for (var part : GameObject in parts){
+			unloadPart(part);
 		}
 	}
 	

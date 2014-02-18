@@ -79,10 +79,12 @@
      <Compile Include="Assets\Scripts\Shared\PartManager.js" />
      <Compile Include="Assets\Scripts\Shared\Parts\Cannon.js" />
      <Compile Include="Assets\Scripts\Shared\Parts\Engine.js" />
+     <Compile Include="Assets\Scripts\Shared\Parts\Extender.js" />
      <Compile Include="Assets\Scripts\Shared\Parts\Part.js" />
      <Compile Include="Assets\Scripts\Shared\Prefabs.js" />
      <Compile Include="Assets\Scripts\Shared\Presets.js" />
      <Compile Include="Assets\Scripts\Shared\Structs\MinimalUser.js" />
+     <Compile Include="Assets\Scripts\Shared\Structs\SpawnRotation.js" />
      <None Include="Assets\ImageEffects\ShaderDir\ColorBalance.shader" />
      <None Include="Assets\ImageEffects\AA Shaders\FXAA3Console.shader" />
      <None Include="Assets\ImageEffects\ShaderDir\MobileBloom.shader" />

@@ -21,7 +21,7 @@ public class Ship extends MonoBehaviour{
 		var thisObj : Ship = targetObject.AddComponent(Ship);
 		thisObj.owner = owner;
 		thisObj.data = data;
-		thisObj.partManager = PartManager.newPartManager(thisObj,data.getField("parts"));
+		thisObj.partManager = PartManager.newPartManager(targetObject,data.getField("parts"));
 		thisObj.main = data.atField("main").getBoolean();
 		return thisObj;
 	}
@@ -36,6 +36,7 @@ public class Ship extends MonoBehaviour{
 	}
 	
 	function Unload(){
+		partManager.Unload();
 		Network.Destroy(gameObject);
 		
 	}

@@ -56,6 +56,11 @@ public class Player
 		return savefile;
 	}
 	
+	function addShip(ship : Ship){
+		ships.Add(ship);
+		savefile.addField("Ship",ship.getData().getContent());
+	}
+	
 	//the owner of this player has logged in
 	function OnUserConnected(user : MinimalUser){
 		if (!this.username.ToUpper() == user.name.ToUpper()) return;

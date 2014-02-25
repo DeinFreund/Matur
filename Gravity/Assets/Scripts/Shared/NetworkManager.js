@@ -48,8 +48,13 @@ var alertDisplayTime:float = 5;
 private var alertTime:float = 2;
 private var authenticated:boolean = false;
 
+function mywin(winId : int){
+	GUI.TextField(new Rect(txtUsernameX,txtUsernameY,txtUsernameW,txtUsernameH),username);
+}
+
 function Start () {
 	
+	Window.newWindow("testwindow",this.gameObject,"mywin",300,500);
 	
 	if (useNAT) Debug.LogError("NAT throughpunch is not (yet) implemented.");
 }

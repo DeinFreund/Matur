@@ -120,6 +120,11 @@ function LoadPlayers(){
 }
 
 function OnApplicationQuit(){
+		GameObject.Find("_ScriptManager").SendMessage("Unload");
+}
+
+function Unload(){
+	
 	if (Network.isServer){
 		UnloadPlayers();
 	}

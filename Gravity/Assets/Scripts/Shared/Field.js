@@ -35,6 +35,7 @@ public class Field//handles section of files
 			
 			//#Debug.Log("<<<<");
 			for (line = 0; line < content.Count; line ++){
+				if (content[line].Length == 0) continue;
 				if (content[line][0] == '<'){
 					var name : String = content[line].Substring(1,content[line].Length - 2);
 					var fieldContent : List.<String> = new List.<String>();
@@ -68,6 +69,7 @@ public class Field//handles section of files
 			//#Debug.Log(id + " Found Content: " + getValue());
 			//#Debug.Log(id + " is leaf: " + isLeaf());
 		}
+		getContent();
 	}
 	
 	public static function newField(content : String[]){
@@ -90,6 +92,10 @@ public class Field//handles section of files
 			list.Add(content[i]);
 		}
 		return list;
+	}
+	public function getClone():Field{
+		
+		return new Field(getClone(getContent()));
 	}
 	
 	//returns first field with specified name
@@ -124,7 +130,8 @@ public class Field//handles section of files
 	
 	public function isLeaf() : boolean
 	{
-		return content.Count > 0 && content[0][0] == "=";
+		//Debug.Log(getId() + " is leaf: " + (content.Count > 0 && content[0].Length > 0 && content[0][0] == "="));
+		return content.Count > 0 && content[0].Length > 0 && content[0][0] == "=";
 	
 	}
 	
@@ -164,10 +171,24 @@ public class Field//handles section of files
 		return fields[fields.Count - 1];
 	}
 	
+	public function removeField(name : String) : Field{
+		
+		var result : List.<int> = new List.<int>();
+		for (var i : int = 0; i < fields.Count; i++){
+			if (names[i].ToUpper() == name.ToUpper()){
+				result.Add(i);
+			}
+		}
+		for (i = result.Count; i >= 0; i--){
+			fields.RemoveAt(result[i]);
+			names.RemoveAt(result[i]);
+		}
+	}
+	
 	public function getContent() : List.<String>{
 		//Debug.Log("getting content of " + id);
+		FileIO.WriteFile("data/field" + id + ".txt", content);
 		if (isLeaf()){
-			FileIO.WriteFile("data/field" + id + ".txt", content);
 			return indent(getClone(content));
 		}else{
 			var content : List.<String> = new List.<String>();
@@ -176,7 +197,6 @@ public class Field//handles section of files
 				content.AddRange(fields[i].getContent());
 				content.Add(String.Format("</{0}>",names[i]));
 			}
-			FileIO.WriteFile("data/field" + id + ".txt", content);
 			return indent(content);
 		}
 	}

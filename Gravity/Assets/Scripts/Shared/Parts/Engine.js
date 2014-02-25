@@ -2,7 +2,7 @@
 
 class Engine extends MonoBehaviour implements Part
 {
-	private var accel : float = 1.0;//relative percentage of acceleration 0.0 - 1.0
+	private var accel : float = 0.0;//relative percentage of acceleration 0.0 - 1.0
 	private var maxAccel : float = 15000.0; //maximal thrust
 	
 	private var sldSpeedRect: Rect = Rect(10,10,20,100);
@@ -19,6 +19,7 @@ class Engine extends MonoBehaviour implements Part
 	//////////
 	
 	private var client : NetworkPlayer;
+	private var data : Field;
 	
 	function OnUserConnected(user : MinimalUser){
 		if (!transform.parent.GetComponent(Ship).getOwner().getUsername().ToUpper() == user.name.ToUpper()) return;
@@ -37,6 +38,25 @@ class Engine extends MonoBehaviour implements Part
 	function Update_S(){
 		if (!transform.parent) return;
 		transform.parent.rigidbody.AddForceAtPosition(transform.forward * 1 *  accel * maxAccel * Time.deltaTime,transform.localPosition + transform.parent.position);
+		
+	}
+	
+	function LoadPart(field : Field){
+		Debug.Log(field.getId());
+		this.accel = field.getField("accel").getFloat();
+		this.data = field;
+	}
+	
+	function Unload(){
+		data.getField("accel").setFloat(accel);
+		
+		Network.Destroy(networkView.viewID);
+		
+	}
+	
+	@RPC
+	function setAccel(accel : float){
+		this.accel = accel;
 	}
 
 	//////////
@@ -46,12 +66,13 @@ class Engine extends MonoBehaviour implements Part
 	
 	private var isOwner : boolean = false;
 	private var window : Window;
+	private var oldAccel : float = -1;
 	
 	@RPC 
 	function setOwner(){
 	
 		isOwner = true;
-		window = Window.newWindow("Engine",gameObject,"OnWindow");
+		window = Window.newWindow("Engine",gameObject,"OnWindow",200,200);
 	}
 	
 	function OnGUI(){
@@ -60,12 +81,16 @@ class Engine extends MonoBehaviour implements Part
 	}
 
 	function OnWindow(winId:int){
-		
+		oldAccel = accel;
 		accel = GUI.VerticalSlider(sldSpeedRect,accel,1,0);
 	}
 	
 	function Update_C(){
-	
+		if (accel != oldAccel) 
+		{
+			networkView.RPC("setAccel",RPCMode.Server,accel);
+			GetComponentInChildren(EngineLight).accel = accel;
+		}
 	}
 	
 }

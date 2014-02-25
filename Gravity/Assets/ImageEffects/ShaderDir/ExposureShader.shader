@@ -55,6 +55,8 @@
 		}
 		ENDCG
 			
+		UsePass "Custom/BloomShader/PASS0"
+		UsePass "Custom/BloomShader/PASS1"
 		Pass{
 			CGPROGRAM
 			

@@ -16,6 +16,7 @@ function Start () {
 }
 
 function Update () {
+
 	bloomMat.SetTexture("_MainTex", renderTexture);
 	bloomMat.SetTexture("_BlurTex", renderTexture);
 	bloomMat.SetFloat("_Radius", radius);

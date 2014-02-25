@@ -10,6 +10,11 @@ var exposureShader : Shader;
 var exposure : float;
 @range (0,2)
 var targetLuminance : float;
+@range (0,5)
+var radius : float;
+@range(0,2)
+var amount : float;
+
 
 var updatesPerSecond : float = 2;
 
@@ -25,6 +30,9 @@ function Start () {
 function Update () {
 	exposureMat.SetTexture("_MainTex", renderTexture);
 	exposureMat.SetFloat("_normMax", exposure);
+	exposureMat.SetTexture("_BlurTex", renderTexture);
+	exposureMat.SetFloat("_Radius", radius);
+	exposureMat.SetFloat("_Amount", amount);
 	
 	if (Time.time - 1f/updatesPerSecond > lastUpdate){
 		adaptExposure();

@@ -1,3 +1,8 @@
+ - 25 Feb 2014
++added Blueprint manager(yet untested)
++added cannon/instantiator(yet untested)
+-detected a bug causing the exposure shader to overwrite antialiasing
+
  - 18 Feb 2014
 +added recursive module (Extender)
 

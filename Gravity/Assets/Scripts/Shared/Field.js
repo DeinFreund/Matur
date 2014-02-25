@@ -93,6 +93,10 @@ public class Field//handles section of files
 		}
 		return list;
 	}
+	public function getClone():Field{
+		
+		return new Field(getClone(getContent()));
+	}
 	
 	//returns first field with specified name
 	//if no such field exists, null is returned
@@ -165,6 +169,20 @@ public class Field//handles section of files
 		fields.Add(new Field());
 		names.Add(name);
 		return fields[fields.Count - 1];
+	}
+	
+	public function removeField(name : String) : Field{
+		
+		var result : List.<int> = new List.<int>();
+		for (var i : int = 0; i < fields.Count; i++){
+			if (names[i].ToUpper() == name.ToUpper()){
+				result.Add(i);
+			}
+		}
+		for (i = result.Count; i >= 0; i--){
+			fields.RemoveAt(result[i]);
+			names.RemoveAt(result[i]);
+		}
 	}
 	
 	public function getContent() : List.<String>{

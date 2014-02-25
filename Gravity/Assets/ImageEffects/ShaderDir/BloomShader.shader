@@ -92,6 +92,7 @@
 	SubShader {
 		Cull Off ZWrite Off
 		pass {
+		name "PASS0"
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
@@ -99,6 +100,7 @@
 			ENDCG
 		}
 		pass {
+		name "PASS1"
 		blend One SrcColor
 			CGPROGRAM
 			#pragma vertex vertOff

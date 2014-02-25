@@ -14,11 +14,11 @@ function Start () {
 }
 
 function Update () {
-	blurMat.SetTexture("_MainTex", renderTexture);
-	blurMat.SetFloat("_Threshold", 0);
-	blurMat.SetFloat("_Amount", blur);
 }
 
 function OnPostRender () {
+	blurMat.SetTexture("_MainTex", renderTexture);
+	blurMat.SetFloat("_Threshold", 0);
+	blurMat.SetFloat("_Amount", blur);
 	FullScreenQuad(blurMat);
 }

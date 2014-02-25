@@ -60,6 +60,10 @@ public class Ship extends MonoBehaviour{
 		return owner;
 	}
 	
+	function getData() : Field{
+		return data.getClone();
+	}
+	
 	function OnOwnerConnected(){
 		Debug.Log("Enabling Controls");
 		networkView.RPC("Enable",owner.getNetworkPlayer());

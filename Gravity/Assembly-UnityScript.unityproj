@@ -70,7 +70,10 @@
      <Compile Include="Assets\Scripts\Server\AccountManager_S.js" />
      <Compile Include="Assets\Scripts\Server\CannonTurretComponent_S.js" />
      <Compile Include="Assets\Scripts\Server\Player.js" />
+     <Compile Include="Assets\Scripts\Server\Prefabs.js" />
+     <Compile Include="Assets\Scripts\Server\Presets.js" />
      <Compile Include="Assets\Scripts\Server\Ship.js" />
+     <Compile Include="Assets\Scripts\Shared\Blueprints.js" />
      <Compile Include="Assets\Scripts\Shared\Field.js" />
      <Compile Include="Assets\Scripts\Shared\FileIO.js" />
      <Compile Include="Assets\Scripts\Shared\Freeze.js" />
@@ -81,8 +84,6 @@
      <Compile Include="Assets\Scripts\Shared\Parts\Engine.js" />
      <Compile Include="Assets\Scripts\Shared\Parts\Extender.js" />
      <Compile Include="Assets\Scripts\Shared\Parts\Part.js" />
-     <Compile Include="Assets\Scripts\Shared\Prefabs.js" />
-     <Compile Include="Assets\Scripts\Shared\Presets.js" />
      <Compile Include="Assets\Scripts\Shared\Structs\MinimalUser.js" />
      <Compile Include="Assets\Scripts\Shared\Structs\SpawnRotation.js" />
      <None Include="Assets\ImageEffects\ShaderDir\ColorBalance.shader" />

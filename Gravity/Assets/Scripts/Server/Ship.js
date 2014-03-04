@@ -14,6 +14,10 @@ public class Ship extends MonoBehaviour{
 		
 		var pos : Vector3 = new Vector3(0,0,0);
 		var rot : Quaternion = new Quaternion(0,0,0,0);
+		return newShip(owner,data,pos,rot);
+	}
+	
+	public static function newShip(owner : Player, data : Field, pos : Vector3, rot : Quaternion) : Ship{
 		
 		var prefab : Transform;
 		prefab = shipPrefabs[parseInt(data.getField("shipPrefab").getValue())];
@@ -24,6 +28,12 @@ public class Ship extends MonoBehaviour{
 		thisObj.partManager = PartManager.newPartManager(targetObject,data.getField("parts"));
 		thisObj.main = data.atField("main").getBoolean();
 		return thisObj;
+	}
+	
+	public static function getShip(t : Transform){
+		
+		while (t.parent != null) t=t.parent;
+		return t.GetComponent(Ship);
 	}
 	
 	function Update(){
@@ -62,6 +72,12 @@ public class Ship extends MonoBehaviour{
 	
 	function getData() : Field{
 		return data.getClone();
+	}
+	
+	function OnGUI(){
+		if (GUI.Button(new Rect(300,100,150,50),"Save da ship")){
+			Blueprints.addBlueprint(this);
+		}
 	}
 	
 	function OnOwnerConnected(){

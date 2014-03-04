@@ -1,0 +1,8 @@
+	<parts>
+	</parts>
+	<shipPrefab>
+		=2
+	</shipPrefab>
+	<main>
+		=true
+	</main>

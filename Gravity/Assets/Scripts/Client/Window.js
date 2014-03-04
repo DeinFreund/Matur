@@ -3,6 +3,7 @@
 class Window extends MonoBehaviour
 	{
 	static private var winHeightMinimized : int = 20;
+	static private var winWidthMinimized : int = 150;
 
 	static private var btnMaximized : Rect = Rect(5,5,20,10);
 	static private var windowCount = 0;
@@ -15,6 +16,7 @@ class Window extends MonoBehaviour
 	
 	private var winRect: Rect = Rect(200,50,200,200);
 	private var winHeightMaximized: int = 200;
+	private var winWidthMaximized: int = 200;
 	
 
 	static function newWindow(title : String,owner : GameObject, message : String, width : int, height : int) : Window
@@ -26,6 +28,7 @@ class Window extends MonoBehaviour
 		window.winRect.width = width;
 		window.winRect.height = height;
 		window.winHeightMaximized = height;
+		window.winWidthMaximized = width;
 		window.id = getUniqueID();
 		Debug.Log("New window instantiated (" + title + ", " + owner + ", " + message + ")");
 		return window;
@@ -45,13 +48,15 @@ class Window extends MonoBehaviour
 
 	function OnWindow(winId:int){
 		
-		if (GUI.Button(btnMaximized,"click")){
+		if (GUI.Button(btnMaximized,"-")){
 			winMaximized = !winMaximized;
 			if (winMaximized){
 			winRect.height = winHeightMaximized;
+			winRect.width = winWidthMaximized;
 			}else
 			{
 			winRect.height = winHeightMinimized;
+			winRect.width = winWidthMinimized;
 			}
 		}
 		

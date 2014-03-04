@@ -127,6 +127,28 @@ public class Field//handles section of files
 		
 		return result;
 	}
+	public function getFields() : List.<Field>{
+		
+		var result : List.<Field> = new List.<Field>();
+		
+		for (var i : int = 0; i < fields.Count; i++){
+		
+			result.Add(fields[i]);
+		}
+		
+		return result;
+	}
+	public function getNames() : List.<String>{
+		
+		var result : List.<String> = new List.<String>();
+		
+		for (var i : int = 0; i < fields.Count; i++){
+		
+			result.Add(names[i]);
+		}
+		
+		return result;
+	}
 	
 	public function isLeaf() : boolean
 	{
@@ -171,15 +193,17 @@ public class Field//handles section of files
 		return fields[fields.Count - 1];
 	}
 	
-	public function removeField(name : String) : Field{
+	public function removeField(name : String){
 		
 		var result : List.<int> = new List.<int>();
 		for (var i : int = 0; i < fields.Count; i++){
 			if (names[i].ToUpper() == name.ToUpper()){
 				result.Add(i);
+				Debug.Log("Added " + i);
 			}
 		}
-		for (i = result.Count; i >= 0; i--){
+		for (i = result.Count - 1; i >= 0; i--){
+			Debug.Log("Removing " + result[i] + "/" + fields.Count);
 			fields.RemoveAt(result[i]);
 			names.RemoveAt(result[i]);
 		}

@@ -54,7 +54,6 @@ function mywin(winId : int){
 
 function Start () {
 	
-	Window.newWindow("testwindow",this.gameObject,"mywin",300,500);
 	
 	if (useNAT) Debug.LogError("NAT throughpunch is not (yet) implemented.");
 }
@@ -105,6 +104,7 @@ function OnGUI(){
 		}
 		if (GUI.Button (new Rect(btnNetworkHostX,btnNetworkHostY,btnNetworkHostW,btnNetworkHostH),"Start Server"))
 		{	
+			Network.InitializeSecurity();
 			Network.InitializeServer(32, netPort, useNAT);
 			Debug.Log("Hosting Server");
 			Presets.init();

@@ -46,6 +46,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Explosivo\Scripts\ExplosionManager.js" />
+     <Compile Include="Assets\Explosivo\Scripts\InitExp.js" />
+     <Compile Include="Assets\Explosivo\Scripts\TurtleManager.js" />
      <Compile Include="Assets\ImageEffects\Classes\AA.js" />
      <Compile Include="Assets\ImageEffects\Classes\Bloom.js" />
      <Compile Include="Assets\ImageEffects\Classes\Blur.js" />
@@ -63,7 +66,9 @@
      <Compile Include="Assets\Scripts\CameraMovement.js" />
      <Compile Include="Assets\Scripts\Client\AccountManager_C.js" />
      <Compile Include="Assets\Scripts\Client\EngineLight.js" />
+     <Compile Include="Assets\Scripts\Client\FileManager.js" />
      <Compile Include="Assets\Scripts\Client\FlareBrightness.js" />
+     <Compile Include="Assets\Scripts\Client\HotKeyManager.js" />
      <Compile Include="Assets\Scripts\Client\ShipClient.js" />
      <Compile Include="Assets\Scripts\Client\Window.js" />
      <Compile Include="Assets\Scripts\Gravity.js" />

@@ -1,3 +1,9 @@
+ - 4 Mar 2014
++finished instantiator
++finished blueprintManager
++added hotkey helper
+-file browser under development
+
  - 25 Feb 2014
 +added Blueprint manager(yet untested)
 +added cannon/instantiator(yet untested)

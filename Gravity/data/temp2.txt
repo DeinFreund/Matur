@@ -1,0 +1,16 @@
+	<password>
+		=123
+	</password>
+	<username>
+		=df
+	</username>
+	<Ship>
+		<parts>
+		</parts>
+		<shipPrefab>
+			=2
+		</shipPrefab>
+		<main>
+			=true
+		</main>
+	</Ship>

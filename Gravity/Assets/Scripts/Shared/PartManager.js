@@ -59,13 +59,13 @@ public class PartManager extends MonoBehaviour
 		
 		object.transform.parent = parentgo.transform;
 		networkView.RPC("SetPartParent",RPCMode.OthersBuffered,object.networkView.viewID);
-		object.SendMessage("LoadPart",field.getField("data"));
+		object.SendMessage("LoadPart",field.getField("data"),SendMessageOptions.DontRequireReceiver);
 		//Debug.Log(object);
 		parts.Add(object);
 	}
 	
 	function unloadPart(go : GameObject){
-		go.SendMessage("Unload");
+		go.SendMessage("Unload",SendMessageOptions.DontRequireReceiver);
 		
 			
 	}

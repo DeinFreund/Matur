@@ -32,8 +32,8 @@ function Start () {
 function LateUpdate () {
     if (target ) {
     	if (Input.GetButton("MouseOrbit")){
-	        x += Input.GetAxis("Mouse X") * xSpeed * 0.02;
-	        y -= Input.GetAxis("Mouse Y") * ySpeed * 0.02;
+	        x += Input.GetAxis("Mouse X") * xSpeed * 0.0003 * Camera.main.fieldOfView;
+	        y -= Input.GetAxis("Mouse Y") * ySpeed * 0.0003 * Camera.main.fieldOfView;
  		}
         distance += Input.GetAxis("Mouse ScrollWheel") * scrollSpeed * 0.02 * Mathf.Abs(distance);
         if (Mathf.Abs(distance) < minSwitchDistance) distance -= minSwitchDistance * 2 * Mathf.Sign(distance);

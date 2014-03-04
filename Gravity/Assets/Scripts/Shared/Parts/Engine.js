@@ -5,12 +5,17 @@ class Engine extends MonoBehaviour implements Part
 	private var accel : float = 0.0;//relative percentage of acceleration 0.0 - 1.0
 	private var maxAccel : float = 15000.0; //maximal thrust
 	
+	
 	private var sldSpeedRect: Rect = Rect(10,10,20,100);
 	
 	function Update(){
 		if (Network.isClient) Update_C();
 		if (Network.isServer) Update_S();
 		
+	}
+	
+	function Start(){
+		if (Network.isServer) Start_S();	
 	}
 	
 	
@@ -20,6 +25,11 @@ class Engine extends MonoBehaviour implements Part
 	
 	private var client : NetworkPlayer;
 	private var data : Field;
+	private var shipRigidbody : Rigidbody;
+	
+	function Start_S(){
+		shipRigidbody = Ship.getShip(transform).getGameObject().rigidbody;
+	}
 	
 	function OnUserConnected(user : MinimalUser){
 		if (!transform.parent.GetComponent(Ship).getOwner().getUsername().ToUpper() == user.name.ToUpper()) return;
@@ -37,7 +47,7 @@ class Engine extends MonoBehaviour implements Part
 	
 	function Update_S(){
 		if (!transform.parent) return;
-		transform.parent.rigidbody.AddForceAtPosition(transform.forward * 1 *  accel * maxAccel * Time.deltaTime,transform.localPosition + transform.parent.position);
+		shipRigidbody.AddForceAtPosition(transform.forward * 1 *  accel * maxAccel * Time.deltaTime,transform.localPosition + transform.parent.position);
 		
 	}
 	

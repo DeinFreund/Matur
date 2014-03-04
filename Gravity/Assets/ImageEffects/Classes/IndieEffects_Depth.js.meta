@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: d027ea3d33ec75e4e887270dcf4b5ecd
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - shader: {fileID: 4800000, guid: ceab0535459c784459de9dd6a676f159, type: 3}
+  - TexMonitor: {instanceID: 0}
+  - DepthCam: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

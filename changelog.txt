@@ -1,3 +1,16 @@
+ - 23 Mar 2014
+-paused development on file browser
++implemented radar module with placeholder texture and manual sensitivity
++client can set exposure time in 0.2 second steps
++radar module data: <sensitivityThreshold>
+-radar module's performance should be tested and improved
++fixed a bug in the player class which enables one player to control every ship
++Windows can now be unloaded/removed
+-onClientDisconnect needed, disconnect causes many errors
+ 
+ - 13 Mar 2014
++file browser opens on client, unable to open any files
+
  - 4 Mar 2014
 +finished instantiator
 +finished blueprintManager

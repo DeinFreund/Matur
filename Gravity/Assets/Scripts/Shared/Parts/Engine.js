@@ -14,9 +14,6 @@ class Engine extends MonoBehaviour implements Part
 		
 	}
 	
-	function Start(){
-		if (Network.isServer) Start_S();	
-	}
 	
 	
 	//////////
@@ -27,12 +24,10 @@ class Engine extends MonoBehaviour implements Part
 	private var data : Field;
 	private var shipRigidbody : Rigidbody;
 	
-	function Start_S(){
-		shipRigidbody = Ship.getShip(transform).getGameObject().rigidbody;
-	}
-	
 	function OnUserConnected(user : MinimalUser){
-		if (!transform.parent.GetComponent(Ship).getOwner().getUsername().ToUpper() == user.name.ToUpper()) return;
+		if (!Ship.getShip(transform)) return;
+		
+		if (Ship.getShip(transform).getOwner().getUsername().ToUpper() != user.name.ToUpper()) return;
 		
 		this.client = user.client;
 		networkView.RPC("setOwner",user.client);
@@ -55,6 +50,7 @@ class Engine extends MonoBehaviour implements Part
 		Debug.Log(field.getId());
 		this.accel = field.getField("accel").getFloat();
 		this.data = field;
+		shipRigidbody = Ship.getShip(transform).getGameObject().rigidbody;
 	}
 	
 	function Unload(){
@@ -66,6 +62,10 @@ class Engine extends MonoBehaviour implements Part
 	
 	@RPC
 	function setAccel(accel : float){
+		if (accel < 0){
+			Debug.LogWarning("Invalid acceleration: " + accel);
+			return;
+		} 
 		this.accel = accel;
 	}
 

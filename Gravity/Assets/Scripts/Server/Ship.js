@@ -5,10 +5,15 @@ static var shipPrefabs : Transform[];
 
 public class Ship extends MonoBehaviour{
 	
+	static private var ships : List.<Ship>;
+	
 	private var owner : Player;
 	private var partManager : PartManager;
 	private var data : Field;
 	private var main : boolean;
+	private var emission : float = 100.0;
+	private var lastRPC : float;
+	private var rpcFreq : float = 5;
 	
 	public static function newShip(owner : Player, data : Field) : Ship{
 		
@@ -27,13 +32,20 @@ public class Ship extends MonoBehaviour{
 		thisObj.data = data;
 		thisObj.partManager = PartManager.newPartManager(targetObject,data.getField("parts"));
 		thisObj.main = data.atField("main").getBoolean();
+		
+		if (ships == null) ships = new List.<Ship>();
+		ships.Add(thisObj);
 		return thisObj;
 	}
 	
-	public static function getShip(t : Transform){
+	public static function getShip(t : Transform) : Ship{
 		
 		while (t.parent != null) t=t.parent;
 		return t.GetComponent(Ship);
+	}
+	
+	public static function getShips() : List.<Ship>{
+		return ships;
 	}
 	
 	function Update(){
@@ -42,7 +54,13 @@ public class Ship extends MonoBehaviour{
 	}
 	
 	function Update_S(){
-		
+		if (Time.time - lastRPC > 1f / rpcFreq) UpdateRemote();
+	}
+	
+	function UpdateRemote(){
+		lastRPC = Time.time;
+		networkView.RPC("setVelocity", RPCMode.Others , rigidbody.velocity, rigidbody.angularVelocity);
+		networkView.RPC("setEmission", RPCMode.Others , emission);
 	}
 	
 	function Unload(){
@@ -68,6 +86,10 @@ public class Ship extends MonoBehaviour{
 	function getOwner() : Player {
 		
 		return owner;
+	}
+	
+	function getEmission() : float{
+		return emission;
 	}
 	
 	function getData() : Field{

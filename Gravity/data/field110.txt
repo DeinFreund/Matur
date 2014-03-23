@@ -1,11 +1,8 @@
 <type>
-=2
+=3
 </type>
 <slot>
-=0
+=1
 </slot>
 <data>
-<accel>
-=0
-</accel>
 </data>

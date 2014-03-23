@@ -1,1 +1,11 @@
+<type>
+=3
+</type>
+<slot>
 =1
+</slot>
+<data>
+<sensitivityThreshold>
+=2.0
+</sensitivityThreshold>
+</data>

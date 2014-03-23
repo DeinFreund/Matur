@@ -20,7 +20,7 @@ function OnNetworkLoadedLevel() {
 function Login(player:NetworkPlayer, name:String, psw:String){
 	
 	psw = Md5Sum(psw);
-	Debug.Log(name + " is trying to log in with password " + psw); // should be hashed
+	Debug.Log(name + " is trying to log in with password " + psw); 
 	
 	name = name.ToUpper();
 	var path:String = getPlayerPath(name);

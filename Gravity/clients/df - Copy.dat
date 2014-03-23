@@ -1,5 +1,5 @@
 	<password>
-		=123
+		=202cb962ac59075b964b07152d234b70
 	</password>
 	<username>
 		=df
@@ -14,9 +14,9 @@
 					=0
 				</slot>
 				<data>
-				<accel>
-				=0
-				</accel>
+					<accel>
+						=0
+					</accel>
 				</data>
 			</part>
 			<part>
@@ -27,9 +27,9 @@
 					=1
 				</slot>
 				<data>
-				<accel>
-				=0
-				</accel>
+					<accel>
+						=0
+					</accel>
 				</data>
 			</part>
 			<part>
@@ -40,35 +40,31 @@
 					=2
 				</slot>
 				<data>
-				<parts>
-				
-			<part>
-				<type>
-					=2
-				</type>
-				<slot>
-					=0
-				</slot>
-				<data>
-				<accel>
-				=0
-				</accel>
-				</data>
-			</part>
-			<part>
-				<type>
-					=2
-				</type>
-				<slot>
-					=1
-				</slot>
-				<data>
-				<accel>
-				=0
-				</accel>
-				</data>
-			</part>
-				</parts>
+					<parts>
+						<part>
+							<type>
+								=2
+							</type>
+							<slot>
+								=0
+							</slot>
+							<data>
+								<accel>
+									=0.1
+								</accel>
+							</data>
+						</part>
+						<part>
+							<type>
+								=3
+							</type>
+							<slot>
+								=1
+							</slot>
+							<data>
+							</data>
+						</part>
+					</parts>
 				</data>
 			</part>
 		</parts>
@@ -79,3 +75,5 @@
 			=true
 		</main>
 	</Ship>
+	<Files>
+	</Files>

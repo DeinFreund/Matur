@@ -1,1 +1,3 @@
-=true
+<sensitivityThreshold>
+=2.0
+</sensitivityThreshold>

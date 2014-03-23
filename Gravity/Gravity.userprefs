@@ -1,9 +1,18 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Client\HotKeyManager.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Client\ShipClient.js">
     <Files>
-      <File FileName="Assets\Scripts\Client\Window.js" Line="51" Column="33" />
-      <File FileName="Assets\Scripts\Client\HotKeyManager.js" Line="10" Column="43" />
+      <File FileName="Assets\Scripts\Client\ShipClient.js" Line="30" Column="47" />
+      <File FileName="Assets\Scripts\Shared\Parts\Radar.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Server\Player.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Client\ShipClient.js" Line="30" Column="47" />
+      <File FileName="Assets\Scripts\Shared\Parts\Extender.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Shared\Parts\Part.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Shared\Parts\Engine.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Client\Window.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Server\Ship.js" Line="64" Column="3" />
+      <File FileName="Assets\Scripts\Server\AccountManager_S.js" Line="38" Column="4" />
+      <File FileName="Assets\Scripts\Server\Prefabs.js" Line="11" Column="15" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

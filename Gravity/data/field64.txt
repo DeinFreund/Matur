@@ -1,1 +1,11 @@
+<type>
+=2
+</type>
+<slot>
+=1
+</slot>
+<data>
+<accel>
 =0
+</accel>
+</data>

@@ -56,12 +56,15 @@
 						</part>
 						<part>
 							<type>
-								=1
+								=3
 							</type>
 							<slot>
 								=1
 							</slot>
 							<data>
+								<sensitivityThreshold>
+									=2.0
+								</sensitivityThreshold>
 							</data>
 						</part>
 					</parts>
@@ -75,3 +78,5 @@
 			=true
 		</main>
 	</Ship>
+	<Files>
+	</Files>

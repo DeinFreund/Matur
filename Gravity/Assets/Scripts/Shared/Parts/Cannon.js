@@ -14,7 +14,7 @@ class Cannon extends MonoBehaviour implements Part
 		return 1;
 	}
 	
-	function Start(){
+	function LoadPart(field : Field){
 		if (transform.parent == null) Network.Destroy(networkView.viewID);
 		
 		
@@ -29,6 +29,7 @@ class Cannon extends MonoBehaviour implements Part
 			}
 		}
 	}
+	 
 	 
 	function OnGUI(){
 		if (GUI.Button(new Rect(100,100,150,50),"Fire da gun")){

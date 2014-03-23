@@ -64,5 +64,9 @@ class Window extends MonoBehaviour
 		GUI.DragWindow ();
 		
 	}
+	
+	public function Unload(){
+		Destroy(this);
+	}
 
 }

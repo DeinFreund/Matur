@@ -7,6 +7,7 @@ public class Player
 	var partManager : PartManager;
 	var savefile : Field;
 	var ships : List.<Ship>;
+	var files : FileManager;
 	
 	//constructor
 	function Player(data: Field){
@@ -25,6 +26,8 @@ public class Player
 			ships.Add(Ship.newShip(this,savefile.getField("Ship")));
 			ships[(ships.Count - 1)].setMain(true);
 		}
+		
+		files = FileManager.newFileManager(ships[0].getGameObject(),data.atField("Files"),this);
 	}
 	
 	function Update(){
@@ -63,12 +66,13 @@ public class Player
 	
 	//the owner of this player has logged in
 	function OnUserConnected(user : MinimalUser){
-		if (!this.username.ToUpper() == user.name.ToUpper()) return;
+		if (this.username.ToUpper() != user.name.ToUpper()) return;
 		
 		this.client = user.client;
 		for (var s : Ship in ships){
 			s.OnOwnerConnected();
 		}
+		files.OnOwnerConnected();
 	}
 	
 	

@@ -48,6 +48,30 @@ static function ReadFile(path : String): String[] {
 	return data.ToArray();
 }
 
+static function Exists(path : String){
+	
+	return (System.IO.File.Exists(path));
+}
+static function FileExists(path : String){
+	
+	return (System.IO.File.Exists(path));
+}
+
+static function Copy(path1: String, path2: String){
+	CopyFile(path1,path2);
+}
+static function CopyFile(path1 : String, path2 : String){
+	if (!Exists(path1)){
+		Debug.LogWarning("File to copy doesn't exist");
+		return;
+	}
+	if (Exists(path2)){
+		Debug.LogWarning("Copy target exists already, delete it first");
+		return;
+	}
+	System.IO.File.Copy(path1,path2);
+}
+
 static function DeleteFile(path : String){
 	
 	if (System.IO.File.Exists(path)) System.IO.File.Delete(path);

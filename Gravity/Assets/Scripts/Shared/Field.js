@@ -104,6 +104,7 @@ public class Field//handles section of files
 		var arr : List.<Field> = getFields(name);
 		if (arr.Count > 0)
 			return arr[0];
+		Debug.Log("There's no field named " + name);
 		return null;
 	}
 	
@@ -157,7 +158,10 @@ public class Field//handles section of files
 	
 	}
 	
-	//for debugging purposes only
+	public function equals(field : Field){
+		return getId() == field.getId();
+	}
+	
 	public function getId() : int
 	{
 		return id;
@@ -166,7 +170,8 @@ public class Field//handles section of files
 	public function getValue() : String
 	{
 		if (isLeaf()){
-			return content[0].Substring(1,content[0].Length - 1);
+			
+			return content[0].Substring(1,content[0].Length - 1).Replace("_{_","<").Replace("_}_",">");
 		}else{
 			Debug.LogWarning(id + " Tried to read value of field that is no leaf");
 			return "";
@@ -176,6 +181,8 @@ public class Field//handles section of files
 	
 	
 	public function setValue(val : String){
+		val = val.Replace("<","_{_");
+		val = val.Replace(">","_}_");
 		content = new List.<String>();
 		content.Add(String.Format("={0}",val));
 	}
@@ -191,6 +198,17 @@ public class Field//handles section of files
 		fields.Add(new Field());
 		names.Add(name);
 		return fields[fields.Count - 1];
+	}
+	
+	public function removeField(field : Field) : boolean{//removes field if child
+		for (var i : int = 0; i < fields.Count; i++){
+			if (fields[i].equals(field)){
+				fields.RemoveAt(i);
+				names.RemoveAt(i);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public function removeField(name : String){
@@ -211,7 +229,7 @@ public class Field//handles section of files
 	
 	public function getContent() : List.<String>{
 		//Debug.Log("getting content of " + id);
-		FileIO.WriteFile("data/field" + id + ".txt", content);
+		//FileIO.WriteFile("data/field" + id + ".txt", content);
 		if (isLeaf()){
 			return indent(getClone(content));
 		}else{
@@ -270,7 +288,7 @@ public class Field//handles section of files
 	public function getFloat() : float{
 		if (getValue() != ""){
 			try{
-				return parseFloat(getValue());
+				return float.Parse(getValue(),System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
 			}catch( ex ){
 				return 0f;
 			}
@@ -292,6 +310,13 @@ public class Field//handles section of files
 		}else{
 			return false;
 		}
+	}
+	
+	public function setString(str : String) : void{
+		setValue(str);
+	}
+	public function getString() : String{
+		return getValue();
 	}
 	
 }

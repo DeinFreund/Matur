@@ -15,7 +15,7 @@ class HotKeyManager extends MonoBehaviour
 	private var selectingKey : boolean = false;
 
 	function Start () {
-  		keyCodes = System.Enum.GetValues(typeof(KeyCode));
+  		keyCodes = System.Enum.GetValues(typeof(KeyCode)) as KeyCode[];
   		Window.newWindow("Hotkey Info",gameObject,"OnHotKeyWindow",windowWidth,windowHeight);
 	}
 	

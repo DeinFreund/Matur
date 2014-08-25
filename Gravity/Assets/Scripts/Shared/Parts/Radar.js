@@ -1,6 +1,6 @@
 ﻿#pragma strict
 
-class Radar extends MonoBehaviour implements Part
+class Radar extends Part
 {
 	
 	function Update(){
@@ -17,18 +17,44 @@ class Radar extends MonoBehaviour implements Part
 	private var client : NetworkPlayer;
 	private var clientOnline : boolean = false;
 	private var sensorData : float[];
-	private var ships : List.<Ship>;
+	//private var ships : List.<Ship>; replaced by blobs
 	private var exposureCounter : int = 0;
 	private var lastExposure : int;
 	private var exposureTime : int = 5;
 	private var sensitivityThreshold : float = 0.1;
 	
+	private static var blobs : List.<RadarBlob> = new List.<RadarBlob>();
+	//private var partname : String;
+	
+	static function addBlob(blob : RadarBlob){
+		blobs.Add(blob);
+	}
+	
+	function getType() : int{
+		return 3;
+	}
+	
+	function getName() : String 
+	{
+		return partname;
+	}
+	
+	function setName(name : String){
+		Debug.Log("radar set name to " + name);
+		partname = name;
+	}
 	
 	function LoadPart(field : Field){
 		data = field;
-		sensitivityThreshold = field.getField("sensitivityThreshold").getFloat();
-	
+		sensitivityThreshold = field.atField("sensitivityThreshold").getFloat();
+		gameObject.SendMessage("setName",field.atField("Name").getString());
+		
 	}
+	function Unload(){
+		data.getField("Name").setString(partname);
+		networkView.RPC("UnloadClient",RPCMode.Others);
+	}
+	 
 	
 	function Update_S(){
 		if (Time.time - lastCapture > 1f / captureFreq) Capture();
@@ -37,22 +63,26 @@ class Radar extends MonoBehaviour implements Part
 	function Capture(){
 		lastCapture = Time.time;
 		exposureCounter ++;
-		if (ships == null || exposureCounter - lastExposure > exposureTime){
-			lastExposure = exposureCounter;
-			ships = Ship.getShips();
-			Debug.Log("Shutter ");
-			if (clientOnline) {
-				for (var i : int = 0; i < ships.Count; i++){
-					ships[i].getGameObject().networkView.RPC("setRadarTex", client, sensorData[i] > sensitivityThreshold);
+		if (sensorData == null || exposureCounter - lastExposure > exposureTime){
+			l	astExposure = exposureCounter;
+			//Debug.Log("Shutter ");
+			for (var i : int = 0; i < blobs.Count; i++){
+				//dont show own ship
+				if (blobs[i] == Ship.getShip(transform).gameObject.GetComponent(RadarBlob)) continue;
+				if (clientOnline) {
+					blobs[i].gameObject.networkView.RPC("setRadarTex", client, sensorData[i] > sensitivityThreshold);
 				}
-				
-				
+				if (sensorData[i] > sensitivityThreshold){
+					Ship.getShip(transform).getShipAI().objectEnteredRadar(blobs[i].getId());
+				}
 			}
-			sensorData = new float[ships.Count];
+				
+				
+			sensorData = new float[blobs.Count];
 			
 		}
-		for (i = 0; i < ships.Count; i++){
-			sensorData[i] += ships[i].getEmission() / Mathf.Pow(Vector3.Distance(transform.position,ships[i].transform.position),2f);
+		for (i = 0; i < blobs.Count; i++){
+			sensorData[i] += blobs[i].getEmission() / Mathf.Pow(Vector3.Distance(transform.position,blobs[i].transform.position),2f);
 		}
 	}
 	
@@ -67,9 +97,11 @@ class Radar extends MonoBehaviour implements Part
 		clientOnline = true;
 	}
 	
-	function getType() : int{
-		return 3;
+	function OnPlayerDisconnected(player : NetworkPlayer){
+		if (client != player) return;
+		clientOnline = false;
 	}
+	
 	
 	@RPC
 	function setExposure(exp : int){
@@ -99,6 +131,12 @@ class Radar extends MonoBehaviour implements Part
 	@RPC
 	function setOwner(){
 		window = Window.newWindow("Radar",gameObject,"OnWindow",390,200);
+	}
+	
+	
+	@RPC
+	function UnloadClient(){
+		window.Unload();
 	}
 	
 	function OnWindow(){

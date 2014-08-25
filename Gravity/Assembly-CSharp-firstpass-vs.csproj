@@ -74,6 +74,15 @@
      <None Include="Assets\ImageEffects\ShaderDir\GodRays.shader" />
      <None Include="Assets\ImageEffects\AA Shaders\DLAA.shader" />
      <None Include="Assets\ImageEffects\AA Shaders\NFAA.shader" />
+ <Reference Include="KopiLua">
+ <HintPath>Assets\lua\Unity\KLITest\Assets\KopiLua.dll</HintPath>
+ </Reference>
+ <Reference Include="KopiLuaDll">
+ <HintPath>Assets\lua\Unity\KLITest\Assets\KopiLuaDll.dll</HintPath>
+ </Reference>
+ <Reference Include="KopiLuaInterface">
+ <HintPath>Assets\lua\Unity\KLITest\Assets\KopiLuaInterface.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

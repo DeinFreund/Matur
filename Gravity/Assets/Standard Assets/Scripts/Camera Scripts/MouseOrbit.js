@@ -42,7 +42,7 @@ function LateUpdate () {
  		
  		y = ClampAngle(y, yMinLimit, yMaxLimit);
  		       
-        var rotation = Quaternion.Euler(y, x, 0);
+        var rotation = Quaternion.Euler(y , x , 0 	);
         var position : Vector3;
         if (distance > 0){
         //move camera

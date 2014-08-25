@@ -5,10 +5,24 @@ public class ShipClient extends MonoBehaviour
 {
 	//enables RPC communication to any ship on clientside
 	
+	//////////
+	//CLIENT//
+	//////////
+	
+	private static final var debugWindowHeight :int = 190;
+	private static final var debugWindowWidth :int= 140;
+	private static final var debugTextRect : Rect = Rect(20,20, 100, 110);
+	private static final var debugClearRect : Rect = Rect(20,150,100,20);
+	private static final var debugClearText : String = "Clear Output";
+	
 	static private var ships : List.<ShipClient>;
 	
 	private var radarGuiTex : Transform	;
 	private var radarGuiTex3DPos : Vector3;
+	private var controlled : boolean = false;
+	private var debugWindow : Window;
+	private var debugText : String = "";
+	
 	
 	static public function getShips() : List.<ShipClient>{
 		return ships;
@@ -23,11 +37,18 @@ public class ShipClient extends MonoBehaviour
 		ships.Add(this);
 	}
 	
+	function OnNetworkLoadedLevel(){
+		if (Network.isClient){
+			gameObject.AddComponent(ShipServerRPCs);
+		}
+	}
+	
 	function Update(){
 		
 		
 		if (Network.isClient) Update_C();
-		//if (Network.isServer) enabled = false;
+		if (Network.isServer) enabled = false;
+		
 	}
 	
 	function Update_C(){
@@ -44,12 +65,23 @@ public class ShipClient extends MonoBehaviour
 	
 	public function getEmission() : float{
 		return emission;
+		
 	}
+	
+	public function OnDebugWindow(){
+		GUI.TextField(debugTextRect,debugText);
+		if (GUI.Button(debugClearRect,debugClearText)){
+			debugText = "";
+		}
+	}
+	
+	
+	
 	
 	@RPC
 	function setRadarTex(val : boolean){
 		if (val && ! radarGuiTex ) radarGuiTex = Instantiate(Prefabs.getRadarGuiTexture(),transform.position,transform.rotation);
-		if (!val && radarGuiTex) Destroy(radarGuiTex);
+		if (!val && radarGuiTex) Destroy(radarGuiTex.gameObject);
 		radarGuiTex3DPos = transform.position;
 	}
 	
@@ -72,6 +104,9 @@ public class ShipClient extends MonoBehaviour
 	function Enable(){
 		Debug.Log("clientsided controls on ship enabled");
 		Camera.main.GetComponent(MouseOrbit).target = transform;
+		Camera.main.transform.parent = transform;
+		controlled = true;
+		debugWindow = Window.newWindow("Lua Output",gameObject,"OnDebugWindow",debugWindowWidth,debugWindowHeight);
 	}
 	
 	
@@ -90,4 +125,12 @@ public class ShipClient extends MonoBehaviour
 		
 		FileManager.newFileManagerClient(gameObject);
 	}
+	
+	@RPC 
+	function PrintToClient(str : String){
+		if (!controlled) return;
+		debugText = str + debugText;
+	}
+	
+
 }

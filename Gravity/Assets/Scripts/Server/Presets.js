@@ -3,7 +3,7 @@ static final var presetFilepath = "data/presets.dat";
 
 private static var data : Field;
 
-static function init() {
+static function BeforeNetworkLoadedLevel() {
 
 	if (Network.isClient){
 		return;

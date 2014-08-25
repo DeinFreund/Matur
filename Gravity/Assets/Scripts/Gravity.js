@@ -10,7 +10,10 @@ function Start () {
 }
 
 function Update () {
-
+	if (Network.isClient) {
+		enabled = false;
+		return;
+	}
 	var o=this.gameObject;
 		for (var o2:GameObject in objekte){
 			transform.LookAt(o2.transform.position);
@@ -25,5 +28,5 @@ function Update () {
 
 function CalcForce(m1:double, m2:double, dist:double):double {
 	var result:double=(m1*m2)/(dist*dist) * 6.67384e-11;
-	return result;
+	return result; 
 }

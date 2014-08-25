@@ -1,11 +1,13 @@
 ﻿#pragma strict
 
-class Cannon extends MonoBehaviour implements Part
+class Cannon extends Part
 {
 	
 	private var owner : Player;
-	private var ammo : Field; //shipdata
+	private var ammo : Field; //shipdata(blueprint)
+	//private var partname : String;
 	private var childSpawns : List.<Transform>;
+	private var data : Field;
 	
 	function getType() :int 
 	{
@@ -14,20 +16,33 @@ class Cannon extends MonoBehaviour implements Part
 		return 1;
 	}
 	
+	function getName() : String 
+	{
+		return partname;
+	}
+	function setName(name : String){
+		partname = name;
+	}
+	
 	function LoadPart(field : Field){
 		if (transform.parent == null) Network.Destroy(networkView.viewID);
 		
-		
-		Ship.getShip(transform).getOwner();
+		gameObject.SendMessage("setName",field.atField("Name").getString());
+		owner = Ship.getShip(transform).getOwner();
+		data = field;
 		
 		childSpawns = new List.<Transform>();
-		for (var child : Transform in transform)
+		for (var child : Transform in (transform) )
 		{
 			if (child.tag=="BulletSpawn"){
 				//Debug.Log(child);
 				childSpawns.Add(child);
 			}
 		}
+	}
+	
+	function Unload(){
+		data.getField("Name").setString(partname);
 	}
 	 
 	 

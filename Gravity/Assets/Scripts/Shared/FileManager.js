@@ -82,8 +82,8 @@ class FileManager extends MonoBehaviour
 	}
 	
 	private function Update_C() {
-		
-		if (Time.time - lastUpdateTime > listUpdateTime){
+		// D I S A B L E D
+		if (false && Time.time - lastUpdateTime > listUpdateTime){
 			//update file list
 			lastUpdateTime = Time.time;
 			var ls : List.<String> = data.getNames();

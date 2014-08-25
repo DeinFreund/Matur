@@ -4,8 +4,8 @@ var playerFilepath:String="clients/";
 var playerlistFilepath:String="data/playerlist.dat";
 
 
-
 private var players:List.<Player> = new List.<Player>();
+static private var connectedUsers : List.<MinimalUser> = new List.<MinimalUser>();
 
 function Start () {
 
@@ -71,6 +71,27 @@ function Register(player:NetworkPlayer, name:String, psw:String){
 	}
 }
 
+static function RequestConnectedUsers(target: GameObject){
+	for (var m : MinimalUser in connectedUsers){
+		target.SendMessage("OnUserConnected",m);
+	}
+}
+
+function OnUserConnected(user : MinimalUser){
+	connectedUsers.Add(user);
+}
+
+function OnPlayerDisconnected(nid : NetworkPlayer){
+	Debug.Log("Player disconnected, clearing remaining RPC calls.");
+	Network.RemoveRPCs(nid);
+	for ( var i : int = 0; i < connectedUsers.Count; i++ ){
+		if (connectedUsers[i].client == nid){
+			connectedUsers.RemoveAt(i);
+			break;
+		}
+	}
+}
+
 function getPlayerPath(name : String) : String{
 	
 	return playerFilepath + name + ".dat";
@@ -123,7 +144,7 @@ function LoadPlayers(){
 }
 
 function OnApplicationQuit(){
-		GameObject.Find("_ScriptManager").SendMessage("Unload");
+	GameObject.Find("_ScriptManager").SendMessage("Unload");
 }
 
 function Unload(){
@@ -136,8 +157,8 @@ function Unload(){
 function UnloadPlayer(player : Player){
 	
 	Debug.Log("Unloading player "+ player.getUsername());
-	FileIO.WriteFile(getPlayerPath(player),player.getData().getContent());
 	player.Unload();
+	FileIO.WriteFile(getPlayerPath(player),player.getData().getContent());
 	players.Remove(player);
 	
 }

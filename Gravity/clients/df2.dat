@@ -13,6 +13,9 @@
 		<main>
 			=true
 		</main>
+		<shipId>
+			=2
+		</shipId>
 	</Ship>
 	<Files>
 	</Files>

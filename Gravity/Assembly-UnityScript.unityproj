@@ -63,20 +63,27 @@
      <Compile Include="Assets\ImageEffects\Classes\TextureScale.js" />
      <Compile Include="Assets\ImageEffects\Classes\VignetteBlur.js" />
      <Compile Include="Assets\ImageEffects\Examples\Billboard.js" />
-     <Compile Include="Assets\Scripts\CameraMovement.js" />
      <Compile Include="Assets\Scripts\Client\AccountManager_C.js" />
      <Compile Include="Assets\Scripts\Client\EngineLight.js" />
      <Compile Include="Assets\Scripts\Client\FlareBrightness.js" />
      <Compile Include="Assets\Scripts\Client\HotKeyManager.js" />
+     <Compile Include="Assets\Scripts\Client\PartClient.js" />
+     <Compile Include="Assets\Scripts\Client\ShipBuilder.js" />
      <Compile Include="Assets\Scripts\Client\ShipClient.js" />
+     <Compile Include="Assets\Scripts\Client\ShipServerRPCs.js" />
      <Compile Include="Assets\Scripts\Client\Window.js" />
      <Compile Include="Assets\Scripts\Gravity.js" />
      <Compile Include="Assets\Scripts\Server\AccountManager_S.js" />
      <Compile Include="Assets\Scripts\Server\CannonTurretComponent_S.js" />
+     <Compile Include="Assets\Scripts\Server\GlobalVars.js" />
+     <Compile Include="Assets\Scripts\Server\PartServer.js" />
      <Compile Include="Assets\Scripts\Server\Player.js" />
      <Compile Include="Assets\Scripts\Server\Prefabs.js" />
      <Compile Include="Assets\Scripts\Server\Presets.js" />
+     <Compile Include="Assets\Scripts\Server\RadarBlob.js" />
+     <Compile Include="Assets\Scripts\Server\SAS.js" />
      <Compile Include="Assets\Scripts\Server\Ship.js" />
+     <Compile Include="Assets\Scripts\Server\ShipAI.js" />
      <Compile Include="Assets\Scripts\Shared\Blueprints.js" />
      <Compile Include="Assets\Scripts\Shared\Field.js" />
      <Compile Include="Assets\Scripts\Shared\FileIO.js" />
@@ -88,8 +95,10 @@
      <Compile Include="Assets\Scripts\Shared\Parts\Cannon.js" />
      <Compile Include="Assets\Scripts\Shared\Parts\Engine.js" />
      <Compile Include="Assets\Scripts\Shared\Parts\Extender.js" />
+     <Compile Include="Assets\Scripts\Shared\Parts\IPart.js" />
      <Compile Include="Assets\Scripts\Shared\Parts\Part.js" />
      <Compile Include="Assets\Scripts\Shared\Parts\Radar.js" />
+     <Compile Include="Assets\Scripts\Shared\Parts\ReactionWheel.js" />
      <Compile Include="Assets\Scripts\Shared\Structs\MinimalUser.js" />
      <Compile Include="Assets\Scripts\Shared\Structs\SpawnRotation.js" />
      <None Include="Assets\ImageEffects\ShaderDir\ColorBalance.shader" />
@@ -116,6 +125,15 @@
      <None Include="Assets\ImageEffects\ShaderDir\GodRays.shader" />
      <None Include="Assets\ImageEffects\AA Shaders\DLAA.shader" />
      <None Include="Assets\ImageEffects\AA Shaders\NFAA.shader" />
+ <Reference Include="KopiLua">
+ <HintPath>Assets\lua\Unity\KLITest\Assets\KopiLua.dll</HintPath>
+ </Reference>
+ <Reference Include="KopiLuaDll">
+ <HintPath>Assets\lua\Unity\KLITest\Assets\KopiLuaDll.dll</HintPath>
+ </Reference>
+ <Reference Include="KopiLuaInterface">
+ <HintPath>Assets\lua\Unity\KLITest\Assets\KopiLuaInterface.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">

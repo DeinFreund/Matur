@@ -99,7 +99,6 @@ function OnGUI(){
 		{
 			Debug.Log("Connecting to Server @ " + netIP + ":" + netPort);
 			Network.Connect(netIP, netPort);
-			Presets.init();
 			
 		}
 		if (GUI.Button (new Rect(btnNetworkHostX,btnNetworkHostY,btnNetworkHostW,btnNetworkHostH),"Start Server"))
@@ -107,7 +106,10 @@ function OnGUI(){
 			Network.InitializeSecurity();
 			Network.InitializeServer(32, netPort, useNAT);
 			Debug.Log("Hosting Server");
-			Presets.init();
+			for (var go : GameObject in FindObjectsOfType(GameObject))
+			{
+				go.SendMessage("BeforeNetworkLoadedLevel", SendMessageOptions.DontRequireReceiver); 
+			}
 			GetComponent(AccountManager_S).LoadPlayers();
 			
 			for (var go : GameObject in FindObjectsOfType(GameObject))
@@ -127,6 +129,10 @@ function OnGUI(){
 function OnAuthenticated(){
 	Debug.Log("Sucessfully authenticated on Server");
 	authenticated = true;
+	for (var go : GameObject in FindObjectsOfType(GameObject))
+	{
+		go.SendMessage("OnNetworkLoadedLevel", SendMessageOptions.DontRequireReceiver); 
+	}
 }
 
 

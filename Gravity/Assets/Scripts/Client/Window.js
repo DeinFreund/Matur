@@ -34,10 +34,15 @@ class Window extends MonoBehaviour
 		return window;
 	}
 	
-	static function getUniqueID() : int
+	static private function getUniqueID() : int
 	{
 		windowCount ++;
 		return windowCount;
+	}
+	
+	public function getWindowID() : int
+	{
+		return id;
 	}
 	
 	function OnGUI(){

@@ -51,12 +51,6 @@ class ReactionWheel extends Part
 	{
 		return partname;
 	}
-	function setName(name : String){
-		Ship.getShip(transform).unregisterPart(this,partname);
-		Ship.getShip(transform).registerPart(this,name);
-		partname = name;
-		
-	}
 	
 	function Update_S(){
 		if (!transform.parent) return;
@@ -70,12 +64,13 @@ class ReactionWheel extends Part
 	function LoadPart(field : Field){
 		Debug.Log(field.getId());
 		this.accel = field.atField("accel").getFloat();
-		gameObject.SendMessage("setName",field.atField("Name").getString());
 		this.data = field;
 		shipRigidbody = Ship.getShip(transform).getGameObject().rigidbody;
+		super(field);
 	}
 	
 	function Unload(){
+		super();
 		data.getField("accel").setFloat(accel);
 		data.getField("Name").setString(partname);
 		
@@ -152,7 +147,6 @@ class ReactionWheel extends Part
 		if (accel != oldAccel) 
 		{
 			networkView.RPC("setRotAccel",RPCMode.Server,accel);
-			GetComponentInChildren(EngineLight).accel = accel;
 			oldAccel = accel;
 		}
 		if (vec != oldvec) 

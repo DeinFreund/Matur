@@ -1,5 +1,8 @@
 var expPrefab:Transform;
 
+function Start(){
+}
+
 function Update () {
 	if(Input.GetMouseButtonDown(0)){
 		var ray = Camera.main.ScreenPointToRay (Input.mousePosition);

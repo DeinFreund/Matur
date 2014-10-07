@@ -17,7 +17,9 @@ public class Field//handles section of files
 		id = counter; counter++;
 	}
 	
-	//constructor
+	
+	
+	
 	public function Field(list : List.<String>){	
 		id = counter; counter++;
 	
@@ -72,13 +74,17 @@ public class Field//handles section of files
 		getContent();
 	}
 	
-	public static function newField(content : String[]){
+	public static function newField(content : String[]) : Field{
 		var list : List.<String> = new List.<String>();
 		
 		for (var i: int = 0; i < content.length; i++){
 			list.Add(content[i]);
 		}
 		return new Field(list);
+	}
+	public static function newField(serial : String) : Field{
+		var del : char[] = ["\n"[0]];
+		return newField(serial.Split(del));
 	}
 	
 	public function size() : int{
@@ -227,6 +233,11 @@ public class Field//handles section of files
 		}
 	}
 	
+	
+	public function serialize() : String{
+		return String.Join("\n",getContent().ToArray());
+	}
+	
 	public function getContent() : List.<String>{
 		//Debug.Log("getting content of " + id);
 		//FileIO.WriteFile("data/field" + id + ".txt", content);
@@ -264,6 +275,19 @@ public class Field//handles section of files
 		vec.x = atField("x").getFloat();
 		vec.y = atField("y").getFloat();
 		vec.z = atField("z").getFloat();
+		return vec;
+	}public function setQuaternion(vec : Quaternion){
+		atField("x").setValue(vec.x.ToString());
+		atField("y").setValue(vec.y.ToString());
+		atField("z").setValue(vec.z.ToString());
+		atField("w").setValue(vec.w.ToString());
+	}
+	public function getQuaternion() : Quaternion{
+		var vec : Quaternion = new Quaternion();
+		vec.x = atField("x").getFloat();
+		vec.y = atField("y").getFloat();
+		vec.z = atField("z").getFloat();
+		vec.w = atField("w").getFloat();
 		return vec;
 	}
 	

@@ -1,9 +1,9 @@
 	<time>
-		=2651.697
+		=4540.095
 	</time>
 	<LuaShipPresetPath>
 		=data/luaShipPreset.lua
 	</LuaShipPresetPath>
 	<ShipCounter>
-		=3
+		=7
 	</ShipCounter>

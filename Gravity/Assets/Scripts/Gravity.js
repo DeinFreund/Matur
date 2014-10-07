@@ -3,22 +3,28 @@ import System.Collections.Generic;
 
 public static var objekte : List. < GameObject > = new List.<GameObject>();
 
+var mass : float;
+private static var rate : float = 0.3;
+private var last : float = 0;
+
 function Start () {
 	
 	objekte.Add(this.gameObject);
-	transform.rigidbody.AddForce(transform.forward * 1e4);
+	if (Network.isClient) {
+	}
 }
 
 function Update () {
-	if (Network.isClient) {
-		enabled = false;
-		return;
-	}
+	if (Time.time-last<rate) return;
+	last = Time.time;
 	var o=this.gameObject;
 		for (var o2:GameObject in objekte){
-			transform.LookAt(o2.transform.position);
-			if (o.transform.position.x != o2.transform.position.x)
-			{o.transform.rigidbody.AddForce(1e9 * transform.forward * CalcForce(o.rigidbody.mass,o2.rigidbody.mass, Vector3.Distance(o.transform.position,o2.transform.position)));}
+			if (o.transform.position != o2.transform.position)
+			{
+				o.transform.rigidbody.velocity+=((o2.transform.position-o.transform.position).normalized * Time.deltaTime * 
+						CalcForce(1,o2.GetComponent(Gravity).mass, Vector3.Distance(o.transform.position,o2.transform.position)));
+				
+			}
 			//print (CalcForce(o.rigidbody.mass,o2.rigidbody.mass, Vector3.Distance(o.transform.position,o2.transform.position)));
 			
 		}	

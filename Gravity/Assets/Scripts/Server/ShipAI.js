@@ -22,6 +22,10 @@ class ShipAI{
 	var zz : float;
 	var am : float = 0;
 	
+	function log(s : String){
+		Debug.Log("(Ship " + ship.getShipId() + "): " + s);
+	}
+	
 	public function setTorque(amt : float, x : float,y : float, z: float, name : String){
 		var v : Vector3 = new Vector3(x,y,z);
 		var target = Quaternion.AngleAxis(90f,Vector3(xx,yy,zz));
@@ -39,13 +43,13 @@ class ShipAI{
 		var so : Vector3;
 		sol.ToAngleAxis(a,so);
 		//ship.getTransform().rotation = target;
-		//Debug.Log(st + " -> " + ta + ": " + v + " vs " + so);
+		//log(st + " -> " + ta + ": " + v + " vs " + so);
 		//v= Vector3(-0.6,0.6,-0.6);
 		//amt = am;
 		//var rot : Quaternion =  s Quaternion.Inverse(ship.getTransform().rotation);
 		//rot.ToAngleAxis(a,v);
 		//amt = a / 180f;
-		//Debug.Log("calledSetTorque " + ship.getParts(name).Count);
+		//log("calledSetTorque " + ship.getParts(name).Count);
 		for (var p : Part in ship.getParts(name)){
 			var rw: ReactionWheel =  p as ReactionWheel;
 			if (rw){
@@ -72,21 +76,30 @@ class ShipAI{
 		
 		lua.RegisterFunction("print",this,this.GetType().GetMethod("PrintToClient"));
 		lua.RegisterFunction("_setSAS",this,this.GetType().GetMethod("setSAS"));
+		lua.RegisterFunction("setEngine",this,this.GetType().GetMethod("setEngine"));
+		lua.RegisterFunction("setTarget",this,this.GetType().GetMethod("selectTarget"));
+		lua.RegisterFunction("fire",this,this.GetType().GetMethod("fire"));
 		lua.RegisterFunction("_getObjectDirection",this,this.GetType().GetMethod("getObjectDirection"));
-		lua.RegisterFunction("_torque",this,this.GetType().GetMethod("setTorque"));
+		//lua.RegisterFunction("_torque",this,this.GetType().GetMethod("setTorque"));
+		lua.RegisterFunction("_addTorque",this,this.GetType().GetMethod("addTorque"));
+		lua.RegisterFunction("_getUp",this,this.GetType().GetMethod("getUp"));
+		lua.RegisterFunction("_getForward",this,this.GetType().GetMethod("getForward"));
+		lua.RegisterFunction("_getRight",this,this.GetType().GetMethod("getRight"));
 		lua.RegisterFunction("_addAngleAxis",this,this.GetType().GetMethod("addAngleAxis"));
-		Debug.Log("Registered Funcs");
+		lua.RegisterFunction("_getObjectDistance",this,this.GetType().GetMethod("getObjectDistance"));
+		lua.RegisterFunction("_getInverse",this,this.GetType().GetMethod("getInverse"));
+		log("Registered Funcs");
 		//load file
 		try{
 			lua.DoFile(luaLibPath);
 			lua.DoFile(path);
 		}catch(ex){
-			Debug.Log("LuaException: " + ex);
+			log("LuaException: " + ex);
 		}
 		try{
 			updateFunc = lua.GetFunction("update");
 		}catch(ex){
-			Debug.Log("LuaException while looking for funcs: " + ex);
+			log("LuaException while looking for funcs: " + ex);
 		}
 	}
 	
@@ -94,7 +107,7 @@ class ShipAI{
 		try{
 			lua.DoString("CallMe('hi')");
 		}catch(ex){
-			Debug.Log("LuaException: " + ex);
+			log("LuaException: " + ex);
 		}
 		lua.DoString("CallMe(5)");
 	}
@@ -118,39 +131,107 @@ class ShipAI{
 		var roll  = Mathf.Atan2(2*y*w - 2*x*z, 1 - 2*y*y - 2*z*z) * 180 / Mathf.PI;
 		var pitch = Mathf.Atan2(2*x*w - 2*y*z, 1 - 2*x*x - 2*z*z) * 180 / Mathf.PI;
 		var yaw   =  Mathf.Asin(2*x*y + 2*z*w) * 180 / Mathf.PI;
-		//Debug.Log("roll " + roll + "pitch " + pitch + "yaw " + yaw );
+		//log("roll " + roll + "pitch " + pitch + "yaw " + yaw );
 		axis = ship.getTransform().forward;
 		try{
+			if(!lua){
+				log("lua is null, restarting Lua");
+				restartLua();
+			}
 			lua["time"] = GlobalVars.getTime();
 			setVector3("rotationAxis",axis);
 			lua["rotationAngle"] = roll;
 			setVector3("rotation",ship.getTransform().rotation.eulerAngles);
 			if (updateFunc)	updateFunc.Call();
 		}catch(ex){
-			Debug.Log("LuaException during update: " + ex);
+			log("LuaException during update: " + ex);
 		}
 	}
 	
 	function PrintToClient(str : String){
-		Debug.Log("Lua printing " + str);
+		log("Lua printing " + str);
 		ship.getGameObject().networkView.RPC("PrintToClient",RPCMode.Others,str);
 	}
 	
 	function CallMe(i : int){
-		Debug.Log("I was called!" + i);
+		log("I was called!" + i);
 	}
-	
-	function setSAS(x : float, y :float, z: float, w:float, on : boolean){
-		ship.transform.GetComponent(SAS).setTargetRot(new Quaternion(x,y,z,w));
+	function setEngine(name : String, val : float){
+		var ls = ship.getParts(name);
+		
+		if (name == "") ls = ship.getParts(2);
+		log(ls.Count + " parts with name " + name);
+		for (var part : Part in ls){
+			if (part.getType() == 2){
+				(part as Engine).setAccel(val);
+			}else{
+				log("not an engine");
+			}
+		}
+	}
+	function setSAS(x : float, y :float, z: float, on : boolean){
+		ship.transform.GetComponent(SAS).setTargetDir(new Vector3(x,y,z));
 		ship.transform.GetComponent(SAS).enable(on);
 	}
+	function getInverse(x : float, y :float, z: float, w:float){
+		setQuaternion("_getInverseRet",Quaternion.Inverse(new Quaternion(x,y,z,w)));
+	}
+	function getObjectDistance(objectID : int){
+		var dist = Vector3.Distance(ship.transform.position, RadarBlob.getBlob(objectID).transform.position);
+		lua["_getObjectDistanceRet"] = dist;
+	}
 	function getObjectDirection(objectID : int){
-		var q : Quaternion = Quaternion.LookRotation(ship.transform.position, RadarBlob.getBlob(objectID).transform.position);
-		setQuaternion("_getObjectDirectionRet",q);
+		log("setting object direction of id " + objectID);
+		//var q : Quaternion = Quaternion.LookRotation(RadarBlob.getBlob(objectID).transform.position-ship.transform.position,Vector3.up);
+		
+		setVector3("_getObjectDirectionRet",(RadarBlob.getBlob(objectID).transform.position-ship.transform.position).normalized);
 		//var vec : Vector3 = Vector3.RotateTowards(ship.transform.position,RadarBlob.getBlob(objectID).transform.position);
+	}
+	function selectTarget(id : int){
+		log("selected Target " + id);
+		for (var part : Part in ship.getParts(3)){
+			var radar : Radar = part as Radar;
+			radar.selectBlob(id);
+		}
+	}
+	function fire(name : String){
+		log('firing cannons with name "' + name + '"');
+		var cannon : Cannon;
+		if (name == "") { 
+			for (var part : Part in ship.getParts(1)){
+				cannon = part as Cannon;
+				cannon.Fire();
+			}
+		}
+		else{
+			for (var part : Part in ship.getParts(name)){
+				if (part.getType() == 1){
+					cannon = part as Cannon;
+					cannon.Fire();
+				}
+			}
+		}
 	}
 	function objectEnteredRadar(objectID : int){
 		lua.DoString("objectEnteredRadar(" + objectID +")");
+	}
+	function objectExitedRadar(objectID : int){
+		lua.DoString("objectExitedRadar(" + objectID +")");
+	}
+	function executeString(string : String){
+		lua.DoString(string);
+	}
+	function addTorque(amt : float, x : float, y : float, z : float){
+		(ship.getGameObject().GetComponent(SAS) as SAS).addTorque(amt, new Vector3(x,y,z));
+	}
+	function getUp(){
+		setVector3("_getUpRet",ship.getTransform().up);
+	}
+	function getForward(){
+		setVector3("_getForwardRet",ship.getTransform().forward);
+	}
+	function getRight(){
+		setVector3("_getRightRet",ship.getTransform().right);
 	}
 	
 }

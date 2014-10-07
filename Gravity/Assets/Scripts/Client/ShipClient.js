@@ -19,10 +19,12 @@ public class ShipClient extends MonoBehaviour
 	
 	private var radarGuiTex : Transform	;
 	private var radarGuiTex3DPos : Vector3;
+	private var radarSelected : boolean;
 	private var controlled : boolean = false;
 	private var debugWindow : Window;
 	private var debugText : String = "";
-	
+	private var health : float;
+	private var maxHealth : float;
 	
 	static public function getShips() : List.<ShipClient>{
 		return ships;
@@ -79,8 +81,12 @@ public class ShipClient extends MonoBehaviour
 	
 	
 	@RPC
-	function setRadarTex(val : boolean){
-		if (val && ! radarGuiTex ) radarGuiTex = Instantiate(Prefabs.getRadarGuiTexture(),transform.position,transform.rotation);
+	function setRadarTex(val : boolean, selected : boolean){
+		if (val && (!radarGuiTex || selected != radarSelected) ) {
+			if (selected) radarGuiTex = Instantiate(Prefabs.getRadarGuiSelectedTexture(),transform.position,transform.rotation);
+			else radarGuiTex = Instantiate(Prefabs.getRadarGuiTexture(),transform.position,transform.rotation);
+			radarSelected = selected;
+		}
 		if (!val && radarGuiTex) Destroy(radarGuiTex.gameObject);
 		radarGuiTex3DPos = transform.position;
 	}
@@ -103,12 +109,19 @@ public class ShipClient extends MonoBehaviour
 	@RPC
 	function Enable(){
 		Debug.Log("clientsided controls on ship enabled");
-		Camera.main.GetComponent(MouseOrbit).target = transform;
+		Camera.main.GetComponent(MouseOrbit).setTarget(transform);
 		Camera.main.transform.parent = transform;
 		controlled = true;
 		debugWindow = Window.newWindow("Lua Output",gameObject,"OnDebugWindow",debugWindowWidth,debugWindowHeight);
+		gameObject.AddComponent(Healthbar);
 	}
 	
+	@RPC
+	function setHealth(hp : float, maxhp : float){
+		health = hp;
+		maxHealth = maxhp;
+		(GetComponent(Healthbar) as Healthbar).health = health/maxHealth;
+	}
 	
 	@RPC
 	function SetPartParent(childId : NetworkViewID){

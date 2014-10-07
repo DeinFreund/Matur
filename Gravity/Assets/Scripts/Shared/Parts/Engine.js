@@ -53,9 +53,6 @@ class Engine extends Part
 	{
 		return partname;
 	}
-	function setName(name : String){
-		partname = name;
-	}
 	
 	function Update_S(){
 		if (!transform.parent) return;
@@ -67,12 +64,13 @@ class Engine extends Part
 	function LoadPart(field : Field){
 		//Debug.Log(field.getId());
 		this.accel = field.atField("accel").getFloat();
-		gameObject.SendMessage("setName",field.atField("Name").getString());
 		this.data = field;
 		shipRigidbody = Ship.getShip(transform).getGameObject().rigidbody;
+		super(field);
 	}
 	
 	function Unload(){
+		super();
 		data.getField("accel").setFloat(accel);
 		data.getField("Name").setString(partname);
 		
@@ -89,6 +87,9 @@ class Engine extends Part
 			return;
 		} 
 		this.accel = accel;
+		if (clientOnline){
+			networkView.RPC("confirmAccel",client,accel);
+		}
 	}
 
 	//////////
@@ -104,12 +105,12 @@ class Engine extends Part
 	function setOwner(){
 	
 		isOwner = true;
-		window = Window.newWindow("Engine",gameObject,"OnWindow",200,200);
+		//window = Window.newWindow("Engine",gameObject,"OnWindow",200,200);
 	}
 	
 	@RPC
 	function UnloadClient(){
-		window.Unload();
+		//window.Unload();
 	}
 	
 	function OnGUI(){
@@ -118,16 +119,22 @@ class Engine extends Part
 	}
 
 	function OnWindow(winId:int){
-		oldAccel = accel;
-		accel = GUI.VerticalSlider(sldSpeedRect,accel,1,0);
+		//oldAccel = accel;
+		//accel = GUI.VerticalSlider(sldSpeedRect,accel,1,0);
 	}
 	
 	function Update_C(){
-		if (accel != oldAccel) 
+		/*if (accel != oldAccel) 
 		{
 			networkView.RPC("setAccel",RPCMode.Server,accel);
-			GetComponentInChildren(EngineLight).accel = accel;
-		}
+		}*/
+	}
+	
+	@RPC
+	function confirmAccel(accel : float){
+		this.accel = accel;
+		oldAccel = accel;
+		GetComponentInChildren(EngineLight).accel = accel;
 	}
 	
 }

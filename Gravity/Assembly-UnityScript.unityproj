@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_0;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_5_4;UNITY_4_5;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -63,9 +63,11 @@
      <Compile Include="Assets\ImageEffects\Classes\TextureScale.js" />
      <Compile Include="Assets\ImageEffects\Classes\VignetteBlur.js" />
      <Compile Include="Assets\ImageEffects\Examples\Billboard.js" />
+     <Compile Include="Assets\Scripts\CameraMovement.js" />
      <Compile Include="Assets\Scripts\Client\AccountManager_C.js" />
      <Compile Include="Assets\Scripts\Client\EngineLight.js" />
      <Compile Include="Assets\Scripts\Client\FlareBrightness.js" />
+     <Compile Include="Assets\Scripts\Client\Healthbar.js" />
      <Compile Include="Assets\Scripts\Client\HotKeyManager.js" />
      <Compile Include="Assets\Scripts\Client\PartClient.js" />
      <Compile Include="Assets\Scripts\Client\ShipBuilder.js" />
@@ -76,6 +78,8 @@
      <Compile Include="Assets\Scripts\Server\AccountManager_S.js" />
      <Compile Include="Assets\Scripts\Server\CannonTurretComponent_S.js" />
      <Compile Include="Assets\Scripts\Server\GlobalVars.js" />
+     <Compile Include="Assets\Scripts\Server\Missile.js" />
+     <Compile Include="Assets\Scripts\Server\PID.js" />
      <Compile Include="Assets\Scripts\Server\PartServer.js" />
      <Compile Include="Assets\Scripts\Server\Player.js" />
      <Compile Include="Assets\Scripts\Server\Prefabs.js" />
@@ -84,11 +88,14 @@
      <Compile Include="Assets\Scripts\Server\SAS.js" />
      <Compile Include="Assets\Scripts\Server\Ship.js" />
      <Compile Include="Assets\Scripts\Server\ShipAI.js" />
+     <Compile Include="Assets\Scripts\Server\Spawn.js" />
+     <Compile Include="Assets\Scripts\Server\WorldGen.js" />
      <Compile Include="Assets\Scripts\Shared\Blueprints.js" />
      <Compile Include="Assets\Scripts\Shared\Field.js" />
      <Compile Include="Assets\Scripts\Shared\FileIO.js" />
      <Compile Include="Assets\Scripts\Shared\FileManager.js" />
      <Compile Include="Assets\Scripts\Shared\Freeze.js" />
+     <Compile Include="Assets\Scripts\Shared\LightFade.js" />
      <Compile Include="Assets\Scripts\Shared\NetworkGroup.js" />
      <Compile Include="Assets\Scripts\Shared\NetworkManager.js" />
      <Compile Include="Assets\Scripts\Shared\PartManager.js" />
@@ -99,6 +106,7 @@
      <Compile Include="Assets\Scripts\Shared\Parts\Part.js" />
      <Compile Include="Assets\Scripts\Shared\Parts\Radar.js" />
      <Compile Include="Assets\Scripts\Shared\Parts\ReactionWheel.js" />
+     <Compile Include="Assets\Scripts\Shared\Parts\SelfDestruct.js" />
      <Compile Include="Assets\Scripts\Shared\Structs\MinimalUser.js" />
      <Compile Include="Assets\Scripts\Shared\Structs\SpawnRotation.js" />
      <None Include="Assets\ImageEffects\ShaderDir\ColorBalance.shader" />
@@ -126,13 +134,13 @@
      <None Include="Assets\ImageEffects\AA Shaders\DLAA.shader" />
      <None Include="Assets\ImageEffects\AA Shaders\NFAA.shader" />
  <Reference Include="KopiLua">
- <HintPath>Assets\lua\Unity\KLITest\Assets\KopiLua.dll</HintPath>
+ <HintPath>C:/Users/User/Documents/matur/Gravity/Assets/lua/Unity/KLITest/Assets/KopiLua.dll</HintPath>
  </Reference>
  <Reference Include="KopiLuaDll">
- <HintPath>Assets\lua\Unity\KLITest\Assets\KopiLuaDll.dll</HintPath>
+ <HintPath>C:/Users/User/Documents/matur/Gravity/Assets/lua/Unity/KLITest/Assets/KopiLuaDll.dll</HintPath>
  </Reference>
  <Reference Include="KopiLuaInterface">
- <HintPath>Assets\lua\Unity\KLITest\Assets\KopiLuaInterface.dll</HintPath>
+ <HintPath>C:/Users/User/Documents/matur/Gravity/Assets/lua/Unity/KLITest/Assets/KopiLuaInterface.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

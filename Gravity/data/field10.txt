@@ -1,7 +1,0 @@
-<Ship>
-<parts>
-</parts>
-<shipPrefab>
-=2
-</shipPrefab>
-</Ship>

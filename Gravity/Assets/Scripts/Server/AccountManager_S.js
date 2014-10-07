@@ -57,6 +57,7 @@ function Register(player:NetworkPlayer, name:String, psw:String){
 	if (playerdata.size() == 0){
 		Debug.Log(name + " registered.");
 		
+		playerdata = Presets.getAll().getClone();
 		playerdata.atField("password").setValue(psw);
 		playerdata.atField("username").setValue(name);
 		
@@ -108,6 +109,25 @@ function findPlayer(name : String) : Player{
 		if (p.getUsername() == name) return p;
 	}
 	return null;
+}
+
+function findPlayer(player : NetworkPlayer) : Player{
+	
+	for (var p : Player in players){
+		if (p.getNetworkPlayer().Equals(player)) return p;
+	}
+	return null;
+}
+
+//deserializes and sends a field to a Player object
+@RPC
+function sendToPlayer(player : NetworkPlayer, key : String, field : String){
+	var p = findPlayer(player);
+	if (p!=null){
+		p.send(key,Field.newField(field));
+	}else{
+		Debug.LogWarning("Player not found");
+	}
 }
 
 function DeletePlayer(name:String){

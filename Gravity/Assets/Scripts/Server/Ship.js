@@ -20,31 +20,40 @@ public class Ship extends MonoBehaviour{
 	private var shipAI : ShipAI;
 	private var shipId : int;
 	private var luaPath : String;
-	private var parts : Dictionary.<String,List.<Part> > = new Dictionary.<String,List.<Part> >();
+	private var health : float = 1;
+	private var maxHealth : float = 1;
+	private var partNames : Dictionary.<String,List.<Part> > = new Dictionary.<String,List.<Part> >();
+	private var partTypes : Dictionary.<int,List.<Part> > = new Dictionary.<int,List.<Part> >();
+	
+	
 	
 	public static function newShip(owner : Player, data : Field) : Ship{
 		
-		var pos : Vector3 = new Vector3(0,0,0);
-		var rot : Quaternion = Quaternion.Euler(0,0,90);
-		return newShip(owner,data,pos,rot);
+		return newShip(owner, data, "");
 	}
-	
-	public static function newShip(owner : Player, data : Field, pos : Vector3, rot : Quaternion) : Ship{
+	public static function newShip(owner : Player, data : Field,  luaPresetPath : String) : Ship{
 		
-		return newShip(owner, data, pos, rot, "");
-	}
-	public static function newShip(owner : Player, data : Field, pos : Vector3, rot : Quaternion, luaPresetPath : String) : Ship{
 		
 		var prefab : Transform;
 		prefab = shipPrefabs[parseInt(data.getField("shipPrefab").getValue())];
-		var targetObject : GameObject = Network.Instantiate(prefab,pos,rot,NetworkGroup.PLAYER).gameObject;
+		var targetObject : GameObject = Network.Instantiate(prefab,Vector3.zero,Quaternion.identity,NetworkGroup.PLAYER).gameObject;
 		var thisObj : Ship = targetObject.AddComponent(Ship);
 		thisObj.owner = owner;
 		thisObj.data = data;
 		thisObj.partManager = PartManager.newPartManager(targetObject,data.getField("parts"));
 		thisObj.main = data.atField("main").getBoolean();
+		thisObj.health = data.atField("health").getFloat();
+		thisObj.maxHealth = data.atField("maxhealth").getFloat();
 		thisObj.gameObject.AddComponent(RadarBlob);
 		thisObj.gameObject.GetComponent(RadarBlob).setBlobEmission(100f);
+		if (data.getField("pos")==null){
+			//spawn
+			thisObj.spawn();
+		}else{
+			thisObj.transform.position = data.getField("pos").getVector3();
+			thisObj.transform.rotation = data.getField("rot").getQuaternion();
+			thisObj.rigidbody.velocity = data.getField("vel").getVector3();
+		}
 		
 		Debug.Log("shipid: " + data.getField("shipId"));
 		if (!data.getField("shipId")){//if there ship doesn't have a unique Ship Id yet
@@ -105,32 +114,54 @@ public class Ship extends MonoBehaviour{
 	
 	function Unload(){
 		partManager.Unload();
+		data.atField("health").setFloat(health);
+		data.atField("pos").setVector3(transform.position);
+		data.atField("rot").setQuaternion(transform.rotation);
+		data.atField("vel").setVector3(rigidbody.velocity);
 		Network.Destroy(gameObject);
 		
 	}
 	
-	public function registerPart(part : Part, name :String){
-		if (name == "") return;
-		if (!parts.ContainsKey(name)){
-			parts.Add(name,new List.<Part>());
-		}
-		//Debug.Log("registered " + name);
-		parts[name].Add(part);
-	}
-	public function unregisterPart(part : Part, name :String){
-		if (name == "") return;
-		if (!parts.ContainsKey(name)) return;
-		parts[name].Remove(part);
+	public function getShipId() : int{
+		return shipId;
 	}
 	
+	public function registerPart(part : Part, name :String){
+		if (name != ""){
+			if (!partNames.ContainsKey(name)){
+				partNames.Add(name,new List.<Part>());
+			}
+			Debug.Log("registered " + name + " of type " + part.getType());
+			partNames[name].Add(part);
+		}
+		
+		if (!partTypes.ContainsKey(part.getType())){
+			partTypes.Add(part.getType(),new List.<Part>());
+		}
+		partTypes[part.getType()].Add(part);
+	}
+	public function unregisterPart(part : Part, name :String){
+		partTypes[part.getType()].Remove(part);
+		if (name == "") return;
+		if (!partNames.ContainsKey(name)) return;
+		partNames[name].Remove(part);
+	}
+	
+	
 	public function getParts(name : String) : List.<Part>{
-		return parts.ContainsKey(name) ? parts[name] : new List.<Part>();
+		return partNames.ContainsKey(name) ? partNames[name] : new List.<Part>();
+	}
+	public function getParts(type : int) : List.<Part>{
+		return partTypes.ContainsKey(type) ? partTypes[type] : new List.<Part>();
 	}
 	
 	function setMain(val : boolean){
 		main = val;
 		data.atField("main").setBoolean(val);
 		Debug.Log("Set " + owner.getUsername() +"'s ship as main ship: " + data.getField("main").getBoolean());
+	}
+	function isMain(){
+		return main;
 	}
 	
 	function getTransform() : Transform {
@@ -170,8 +201,32 @@ public class Ship extends MonoBehaviour{
 	function OnOwnerConnected(){
 		Debug.Log("Enabling Controls");
 		networkView.RPC("Enable",owner.getNetworkPlayer());
+		networkView.RPC("setHealth",owner.getNetworkPlayer(),health,maxHealth);
 	}
 	
+	public function damage(amt : float){
+		health -= amt;
+		Debug.Log("Ship " + shipId + " has " + health + " hp left.");
+		if (owner.isConnected()){
+			networkView.RPC("setHealth",owner.getNetworkPlayer(),health,maxHealth);
+		}
+		if (health <= 0) die();
+	}
+	
+	public function die(){
+		Network.Instantiate(Prefabs.getShipExplosion(),transform.position,transform.rotation,0);
+		health = maxHealth;
+		spawn();
+	}
+	
+	private function spawn(){
+	
+		var s = Spawn.getSpawn();
+		transform.position = s.position;
+		transform.rotation = s.rotation;
+		rigidbody.velocity = WorldGen.getOrbitalVelocity(gameObject);
+		Debug.LogWarning(rigidbody.velocity);
+	}
 	
 	
 }

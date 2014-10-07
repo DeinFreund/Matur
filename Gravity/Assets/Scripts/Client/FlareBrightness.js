@@ -21,6 +21,8 @@
  //Simple counter to ensure that the flare is visible for a few frames before the layer is changed
 
  var count = 0;
+ 
+ var multiplyLightStrength : boolean = false;
 
  
 
@@ -43,21 +45,25 @@
  {
 	if (!Camera.current) return;
  	if (!cam) cam = Camera.current;
-	 var heading: Vector3 = gameObject.transform.position - cam.transform.position;
-	 var heading2: Vector3 = cam.transform.position -gameObject.transform.position;
-	 var dist: float = Vector3.Dot(heading, cam.transform.forward);
-	 var viewPos : Vector3 = cam.WorldToViewportPoint (gameObject.transform.position);
-	
-	 
-	 //Turns off the flare when it goes outside of the camera's frustrum
-	 if( viewPos.x > coord1 || viewPos.x < coord2 || viewPos.y < coord2 || viewPos.y > coord1)
-	 	gameObject.GetComponent(LensFlare).brightness = 0;
-	 
-	 //Turns off the flare when it's occluded by a collider.
-	 else if (Physics.Raycast (gameObject.transform.position, heading2.normalized, Mathf.Clamp(dist,0.01,20)))
-	 	gameObject.GetComponent(LensFlare).brightness = 0;
-	
-	 else{
-	 	gameObject.GetComponent(LensFlare).brightness = strength/(falloff ? dist : 1);
-	 }
+ 	var lightmult = 1.0;
+ 	if (multiplyLightStrength){
+ 		lightmult = light.intensity;
+ 	}
+	var heading: Vector3 = gameObject.transform.position - cam.transform.position;
+	var heading2: Vector3 = cam.transform.position -gameObject.transform.position;
+	var dist: float = Vector3.Dot(heading, cam.transform.forward);
+	var viewPos : Vector3 = cam.WorldToViewportPoint (gameObject.transform.position);
+
+
+	//Turns off the flare when it goes outside of the camera's frustrum
+	if( viewPos.x > coord1 || viewPos.x < coord2 || viewPos.y < coord2 || viewPos.y > coord1)
+		gameObject.GetComponent(LensFlare).brightness = 0;
+
+	//Turns off the flare when it's occluded by a collider.
+	else if (Physics.Raycast (gameObject.transform.position, heading2.normalized, Mathf.Clamp(dist,0.01,20)))
+		gameObject.GetComponent(LensFlare).brightness = 0;
+
+	else{
+		gameObject.GetComponent(LensFlare).brightness = lightmult*strength/(falloff ? dist : 1);
+	}
  }

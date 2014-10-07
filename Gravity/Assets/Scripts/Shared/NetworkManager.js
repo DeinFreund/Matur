@@ -106,12 +106,15 @@ function OnGUI(){
 			Network.InitializeSecurity();
 			Network.InitializeServer(32, netPort, useNAT);
 			Debug.Log("Hosting Server");
+			GlobalVars.BeforeNetworkLoadedLevel();
+			Presets.BeforeNetworkLoadedLevel();
 			for (var go : GameObject in FindObjectsOfType(GameObject))
 			{
 				go.SendMessage("BeforeNetworkLoadedLevel", SendMessageOptions.DontRequireReceiver); 
 			}
-			GetComponent(AccountManager_S).LoadPlayers();
 			
+			GetComponent(WorldGen).Generate();
+			GetComponent(AccountManager_S).LoadPlayers();
 			for (var go : GameObject in FindObjectsOfType(GameObject))
 			{
 				go.SendMessage("OnNetworkLoadedLevel", SendMessageOptions.DontRequireReceiver); 

@@ -1,4 +1,4 @@
-var target : Transform;
+private var target : Transform;
 var distance = 10.0;
 var minDistanceLimit = -50.0;
 var minSwitchDistance = 10;
@@ -20,13 +20,11 @@ private var distanceMult : int = 1 ;
 @script AddComponentMenu("Camera-Control/Mouse Orbit")
 
 function Start () {
+	setTarget( GameObject.Find("Cube").transform);
     var angles = transform.eulerAngles;
     x = angles.y;
     y = angles.x;
 
-	// Make the rigid body not change rotation
-   	if (rigidbody)
-		rigidbody.freezeRotation = true;
 }
 
 function LateUpdate () {
@@ -46,16 +44,21 @@ function LateUpdate () {
         var position : Vector3;
         if (distance > 0){
         //move camera
-        	position = rotation * Vector3(0.0, 0.0, -distance) + target.position;
+        	position = rotation * Vector3(0.0, 0.0, -distance);
         	Camera.main.fieldOfView = defaultFOV;
         }else{
-        	position = rotation * Vector3(0.0, 0.0, minSwitchDistance) + target.position;
+        	position = rotation * Vector3(0.0, 0.0, minSwitchDistance);
         	Camera.main.fieldOfView = defaultFOV + minSwitchDistance + distance;
         }
         
-        transform.rotation = rotation;
-        transform.position = position;
+        transform.localRotation = rotation;
+        transform.localPosition = position;
     }
+}
+
+public function setTarget(target : Transform){
+	this.target = target;
+	transform.parent = target;
 }
 
 static function ClampAngle (angle : float, min : float, max : float) {

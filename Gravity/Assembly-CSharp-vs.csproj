@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_0;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_5_4;UNITY_4_5;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -46,15 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\lua\LLStressTest\LLStressTest.cs" />
-     <Compile Include="Assets\lua\LLStressTest\Properties\AssemblyInfo.cs" />
-     <Compile Include="Assets\lua\SimpleTest\Program.cs" />
-     <Compile Include="Assets\lua\SimpleTest\Properties\AssemblyInfo.cs" />
-     <Compile Include="Assets\lua\StressTest\Properties\AssemblyInfo.cs" />
-     <Compile Include="Assets\lua\StressTest\StressTest.cs" />
-     <Compile Include="Assets\lua\TestLuaInterface\AssemblyInfo.cs" />
-     <Compile Include="Assets\lua\TestLuaInterface\Entity.cs" />
-     <Compile Include="Assets\lua\TestLuaInterface\TestLua.cs" />
+     <Compile Include="Assets\Scripts\MoveCamera.cs" />
      <None Include="Assets\ImageEffects\ShaderDir\ColorBalance.shader" />
      <None Include="Assets\ImageEffects\AA Shaders\FXAA3Console.shader" />
      <None Include="Assets\ImageEffects\ShaderDir\MobileBloom.shader" />
@@ -68,12 +60,10 @@
      <None Include="Assets\ImageEffects\ShaderDir\Vignette.shader" />
      <None Include="Assets\ImageEffects\ShaderDir\StarBloom.shader" />
      <None Include="Assets\ImageEffects\ShaderDir\MotionBlurAlphaBlended.shader" />
-     <None Include="Assets\lua\samples\README.txt" />
      <None Include="Assets\ImageEffects\AA Shaders\FXAAPreset3.shader" />
      <None Include="Assets\ImageEffects\AA Shaders\SSAA.shader" />
      <None Include="Assets\ImageEffects\ShaderDir\negative.shader" />
      <None Include="Assets\ImageEffects\ShaderDir\DOFShader.shader" />
-     <None Include="Assets\lua\README.txt" />
      <None Include="Assets\ImageEffects\ShaderDir\Shadow-ScreenBlur.shader" />
      <None Include="Assets\ImageEffects\ShaderDir\IndieRadialBlur.shader" />
      <None Include="Assets\ImageEffects\ShaderDir\ExposureShader.shader" />
@@ -82,16 +72,16 @@
      <None Include="Assets\ImageEffects\AA Shaders\DLAA.shader" />
      <None Include="Assets\ImageEffects\AA Shaders\NFAA.shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
- </Reference>
- <Reference Include="KopiLuaDll">
- <HintPath>Assets\lua\Unity\KLITest\Assets\KopiLuaDll.dll</HintPath>
- </Reference>
- <Reference Include="KopiLuaInterface">
- <HintPath>Assets\lua\Unity\KLITest\Assets\KopiLuaInterface.dll</HintPath>
+ <HintPath>C:/Users/User/Documents/matur/Gravity/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
  <Reference Include="KopiLua">
- <HintPath>Assets\lua\Unity\KLITest\Assets\KopiLua.dll</HintPath>
+ <HintPath>C:/Users/User/Documents/matur/Gravity/Assets/lua/Unity/KLITest/Assets/KopiLua.dll</HintPath>
+ </Reference>
+ <Reference Include="KopiLuaDll">
+ <HintPath>C:/Users/User/Documents/matur/Gravity/Assets/lua/Unity/KLITest/Assets/KopiLuaDll.dll</HintPath>
+ </Reference>
+ <Reference Include="KopiLuaInterface">
+ <HintPath>C:/Users/User/Documents/matur/Gravity/Assets/lua/Unity/KLITest/Assets/KopiLuaInterface.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

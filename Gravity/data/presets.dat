@@ -2,6 +2,44 @@
 		<parts>
 		</parts>
 		<shipPrefab>
-			=2
+			=4
 		</shipPrefab>
+		<health>
+			=100.0
+		</health>
+		<maxhealth>
+			=100.0
+		</maxhealth>
 	</Ship>
+	<hotkeys>
+		<D>
+			=addTorque(1.0,getUp())
+		</D>
+		<X>
+			=setTarget(getClosestObject())
+		</X>
+		<Space>
+			=fire("")
+		</Space>
+		<W>
+			=addTorque(1.0,getRight())
+		</W>
+		<A>
+			=addTorque(-1.0,getUp())
+		</A>
+		<S>
+			=addTorque(-1.0,getRight())
+		</S>
+		<Q>
+			=addTorque(1.0,getForward())
+		</Q>
+		<E>
+			=addTorque(-1.0,getForward())
+		</E>
+		<C>
+			=setEngine("",1.0)
+		</C>
+		<Y>
+			=setEngine("",0.0)
+		</Y>
+	</hotkeys>

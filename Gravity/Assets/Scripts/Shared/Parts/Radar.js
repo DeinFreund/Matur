@@ -3,6 +3,11 @@
 class Radar extends Part
 {
 	
+	class BlobAttr{
+		
+		var seenBefore : boolean = false;
+	}
+	
 	function Update(){
 		if (Network.isServer) Update_S();
 	}
@@ -22,9 +27,10 @@ class Radar extends Part
 	private var lastExposure : int;
 	private var exposureTime : int = 5;
 	private var sensitivityThreshold : float = 0.1;
+	private var selectedBlob : int = 0;
+	private var blobAttr : Dictionary.<int, BlobAttr> = new Dictionary.<int, BlobAttr>();
 	
 	private static var blobs : List.<RadarBlob> = new List.<RadarBlob>();
-	//private var partname : String;
 	
 	static function addBlob(blob : RadarBlob){
 		blobs.Add(blob);
@@ -39,20 +45,21 @@ class Radar extends Part
 		return partname;
 	}
 	
-	function setName(name : String){
-		Debug.Log("radar set name to " + name);
-		partname = name;
-	}
 	
 	function LoadPart(field : Field){
 		data = field;
 		sensitivityThreshold = field.atField("sensitivityThreshold").getFloat();
-		gameObject.SendMessage("setName",field.atField("Name").getString());
+		super(field);
 		
 	}
 	function Unload(){
+		
+		for (var i : int = 0; i < blobs.Count; i++){
+			blobs[i].gameObject.networkView.RPC("setRadarTex", client, false, false);
+		}
 		data.getField("Name").setString(partname);
 		networkView.RPC("UnloadClient",RPCMode.Others);
+		super();
 	}
 	 
 	
@@ -60,26 +67,44 @@ class Radar extends Part
 		if (Time.time - lastCapture > 1f / captureFreq) Capture();
 	}
 	
+	function selectBlob(id : int){
+		selectedBlob = id;
+	}
+	
+	function getTarget() : Transform{
+		if (! blobAttr[selectedBlob].seenBefore) {
+			Debug.Log("RadarBlob not in range.");
+			return null; //blob not in range
+		}
+		return RadarBlob.getBlob(selectedBlob).transform;
+	}
+	
 	function Capture(){
 		lastCapture = Time.time;
 		exposureCounter ++;
-		if (sensorData == null || exposureCounter - lastExposure > exposureTime){
-			l	astExposure = exposureCounter;
+		if (sensorData == null || sensorData.Length != blobs.Count){
+			sensorData = new float[blobs.Count];
+		}
+		if ( exposureCounter - lastExposure > exposureTime){
+			lastExposure = exposureCounter;
 			//Debug.Log("Shutter ");
 			for (var i : int = 0; i < blobs.Count; i++){
 				//dont show own ship
 				if (blobs[i] == Ship.getShip(transform).gameObject.GetComponent(RadarBlob)) continue;
+				if (!blobAttr.ContainsKey(blobs[i].getId())) blobAttr[blobs[i].getId()] = new BlobAttr();
 				if (clientOnline) {
-					blobs[i].gameObject.networkView.RPC("setRadarTex", client, sensorData[i] > sensitivityThreshold);
+					blobs[i].gameObject.networkView.RPC("setRadarTex", client, sensorData[i] > sensitivityThreshold, 
+							blobs[i].getId() == selectedBlob);
 				}
-				if (sensorData[i] > sensitivityThreshold){
+				if (sensorData[i] > sensitivityThreshold && !blobAttr[blobs[i].getId()].seenBefore){
+					blobAttr[blobs[i].getId()].seenBefore = true;
 					Ship.getShip(transform).getShipAI().objectEnteredRadar(blobs[i].getId());
 				}
+				if (sensorData[i] <= sensitivityThreshold && blobAttr[blobs[i].getId()].seenBefore){
+					blobAttr[blobs[i].getId()].seenBefore = false;
+					Ship.getShip(transform).getShipAI().objectExitedRadar(blobs[i].getId());
+				}
 			}
-				
-				
-			sensorData = new float[blobs.Count];
-			
 		}
 		for (i = 0; i < blobs.Count; i++){
 			sensorData[i] += blobs[i].getEmission() / Mathf.Pow(Vector3.Distance(transform.position,blobs[i].transform.position),2f);

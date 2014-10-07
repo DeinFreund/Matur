@@ -8,7 +8,7 @@
 		<parts>
 			<part>
 				<type>
-					=2
+					=1
 				</type>
 				<slot>
 					=0
@@ -18,13 +18,13 @@
 						=0
 					</accel>
 					<Name>
-						=
+						=blub
 					</Name>
 				</data>
 			</part>
 			<part>
 				<type>
-					=2
+					=1
 				</type>
 				<slot>
 					=1
@@ -34,7 +34,7 @@
 						=0
 					</accel>
 					<Name>
-						=KleinTimon
+						=blub
 					</Name>
 				</data>
 			</part>
@@ -47,66 +47,6 @@
 				</slot>
 				<data>
 					<parts>
-						<part>
-							<type>
-								=4
-							</type>
-							<slot>
-								=0
-							</slot>
-							<data>
-								<accel>
-									=1
-								</accel>
-								<Name>
-									=ReactionWheel
-								</Name>
-							</data>
-						</part>
-						<part>
-							<type>
-								=2
-							</type>
-							<slot>
-								=1
-							</slot>
-							<data>
-								<accel>
-									=0
-								</accel>
-								<Name>
-									=Engine
-								</Name>
-							</data>
-						</part>
-						<part>
-							<type>
-								=0
-							</type>
-							<slot>
-								=2
-							</slot>
-							<data>
-								<parts>
-									<part>
-										<type>
-											=3
-										</type>
-										<slot>
-											=2
-										</slot>
-										<data>
-											<sensitivityThreshold>
-											</sensitivityThreshold>
-											<Name>
-											</Name>
-										</data>
-									</part>
-								</parts>
-								<Name>
-								</Name>
-							</data>
-						</part>
 					</parts>
 					<Name>
 						=Timon
@@ -123,6 +63,80 @@
 		<shipId>
 			=1
 		</shipId>
+		<health>
+			=20
+		</health>
+		<maxhealth>
+			=100
+		</maxhealth>
+		<pos>
+			<x>
+				=9946.832
+			</x>
+			<y>
+				=-29.84236
+			</y>
+			<z>
+				=7701.234
+			</z>
+		</pos>
+		<rot>
+			<x>
+				=-0.05435707
+			</x>
+			<y>
+				=0.001526391
+			</y>
+			<z>
+				=-0.001773793
+			</z>
+			<w>
+				=0.9985188
+			</w>
+		</rot>
+		<vel>
+			<x>
+				=5.873577
+			</x>
+			<y>
+				=0.0001124808
+			</y>
+			<z>
+				=4.463355
+			</z>
+		</vel>
 	</Ship>
 	<Files>
 	</Files>
+	<hotkeys>
+		<F>
+			=setTarget(1)
+		</F>
+		<G>
+			=test()
+		</G>
+		<D>
+			=addTorque(-1.0,getUp())
+		</D>
+		<X>
+			=setTarget(getClosestObject())
+		</X>
+		<Space>
+			=fire("")
+		</Space>
+		<W>
+			=addTorque(1.0,getRight())
+		</W>
+		<A>
+			=addTorque(1.0,getUp())
+		</A>
+		<S>
+			=addTorque(-1.0,getRight())
+		</S>
+		<Q>
+			=addTorque(1.0,getForward())
+		</Q>
+		<E>
+			=addTorque(-1.0,getForward())
+		</E>
+	</hotkeys>

@@ -9,13 +9,22 @@ function addAngleAxis(w1, v1, w2, v2)
 	return _addAngleAxisW , {_addAngleAxisX,_addAngleAxisY,_addAngleAxisZ}
 end
 
+function getInverse(q)
+	_getInverse(q[1],q[2],q[3],q[4])
+	return _getInverseRet
+end
 function setSAS(q, on)
-	_setSAS(q[1],q[2],q[3],q[4],on)
+	_setSAS(q[1],q[2],q[3],on)
 end
 
-function setSAS(x,y,z,w,on)
-	_setSAS(x,y,z,w,on)
+function getObjectDistance(objID)
+	_getObjectDistance(objID)
+	return _getObjectDistanceRet
 end
+
+--function setSAS(x,y,z,w,on)
+--	_setSAS(x,y,z,w,on)
+--end
 
 function getObjectDirection(objID)
 	_getObjectDirection(objID)
@@ -52,6 +61,24 @@ function angDiff(a,b)
 	--from b to a
 	print ("angle " .. a-b)
 	return normAng(a-b) 
+end
+
+function getUp()
+	_getUp()
+	return _getUpRet
+end
+function getRight()
+	_getRight()
+	return _getRightRet
+end
+
+function getForward()
+	_getForward()
+	return _getForwardRet
+end
+
+function addTorque(amt, axis)
+	_addTorque(amt,axis[1],axis[2],axis[3])
 end
 
 function abs(a)

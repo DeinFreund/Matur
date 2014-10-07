@@ -15,38 +15,6 @@
 				</slot>
 				<data>
 					<parts>
-						<part>
-							<type>
-								=4
-							</type>
-							<slot>
-								=0
-							</slot>
-							<data>
-								<accel>
-									=1
-								</accel>
-								<Name>
-									=ReactionWheel
-								</Name>
-							</data>
-						</part>
-						<part>
-							<type>
-								=2
-							</type>
-							<slot>
-								=1
-							</slot>
-							<data>
-								<accel>
-									=0
-								</accel>
-								<Name>
-									=Engine
-								</Name>
-							</data>
-						</part>
 					</parts>
 					<Name>
 						=
@@ -63,6 +31,50 @@
 		<shipId>
 			=3
 		</shipId>
+		<health>
+			=100
+		</health>
+		<maxhealth>
+			=100
+		</maxhealth>
+		<pos>
+			<x>
+				=180502.8
+			</x>
+			<y>
+				=383032.9
+			</y>
+			<z>
+				=2429830
+			</z>
+		</pos>
+		<rot>
+			<x>
+				=0.05741939
+			</x>
+			<y>
+				=0.1082811
+			</y>
+			<z>
+				=0.9577116
+			</z>
+			<w>
+				=-0.2603203
+			</w>
+		</rot>
+		<vel>
+			<x>
+				=60.73347
+			</x>
+			<y>
+				=120.7505
+			</y>
+			<z>
+				=802.1855
+			</z>
+		</vel>
 	</Ship>
 	<Files>
 	</Files>
+	<hotkeys>
+	</hotkeys>

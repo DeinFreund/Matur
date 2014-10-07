@@ -7,7 +7,7 @@ class GlobalVars extends MonoBehaviour{
 	static private var field : Field;
 	static private var startTime : float;
 
-	function BeforeNetworkLoadedLevel () {
+	static function BeforeNetworkLoadedLevel () {
 		if (!Network.isServer) return;
 		field = Field.newField(FileIO.ReadFile(globalVarsPath));
 		

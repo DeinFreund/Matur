@@ -10,8 +10,8 @@ class Extender extends  Part
 	
 	function LoadPart(field : Field){
 		partManager = PartManager.newPartManager(gameObject, field.atField("parts"));
-		gameObject.SendMessage("setName",field.atField("Name").getString());
 		data = field;
+		super(field);
 	}
 	
 	function getType() : int{
@@ -23,11 +23,9 @@ class Extender extends  Part
 	{
 		return partname;
 	}
-	function setName(name : String){
-		partname = name;
-	}
 	
 	function Unload(){
+		super();
 		partManager.Unload();
 		data.getField("Name").setString(partname);
 	}

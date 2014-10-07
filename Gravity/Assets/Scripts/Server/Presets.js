@@ -14,6 +14,11 @@ static function BeforeNetworkLoadedLevel() {
 }
 
 
+static function getAll(): Field{
+
+	return data;//watch out - this is a reference
+}
+
 static function getShip(): Field{
 
 	return data.getField("Ship");//watch out - this is a reference

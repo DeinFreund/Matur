@@ -91,15 +91,48 @@ end
 
 local lastTime = 0.0
 
+local radarObjects = {}
+
 function objectEnteredRadar(objectID)
 	print(objectID .. " entered radar")
-	setSAS(getObjectDirection(objectID),1)
+	dir = getObjectDirection(objectID)
+		
+	setSAS(dir,1)
+	radarObjects[objectID] = true
+	setTarget(objectID)
 end
+
+function objectExitedRadar(objectID)
+	radarObjects[objectID] = false
+end
+
+function getClosestObject()
+	bestDist = -1
+	bestID = -1
+	for k,v in ipairs(radarObjects) do
+		
+		if v and (bestDist < 0 or getObjectDistance(k) < bestDist) then
+			bestDist = getObjectDistance(k)
+			bestID = k
+		end
+	end
+	return bestID
+end
+
+function test()
+	print("test successful")
+end
+
+local lastShot = 0
 
 function update(n)
 	deltaTime = time - lastTime
 	lastTime = time
 	
+	if time - lastShot > 1.5 then
+		fire("Cannon")
+		lastShot = time
+	end
 	if not targetRotAxis  then
 		--resetSAS()
 	end
@@ -111,3 +144,5 @@ end
 time = 0
 --rotationAxis = {0,0,0}
 print("hi\n")
+
+setEngine("blub",0.0)

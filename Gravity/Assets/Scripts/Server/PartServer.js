@@ -11,10 +11,6 @@ class PartServer extends MonoBehaviour
 	private var client : NetworkPlayer;
 	private var clientOnline = false;
 	
-	function setName(name : String){
-		//Debug.Log("got name " + name);
-		this.partname = name;
-	}
 	
 	function OnUserConnected(user : MinimalUser){
 		if (!Ship.getShip(transform)) return;
@@ -74,7 +70,7 @@ class PartServer extends MonoBehaviour
 			pos = gameObject.GetComponent(PartManager).getBuildingSlotPositions();
 			ids = gameObject.GetComponent(PartManager).getBuildingSlotChildrenIDs();
 		}
-		if (pos == null || pos.length == 0) return; //no need to sent empty arrays, also this doesnt work with unity's RPCs
+		if (pos == null || pos.length == 0) return; //no need to send empty arrays, also this doesnt work with unity's RPCs
 		Debug.Log("sending building slots " + pos);
 		networkView.RPC("setBuildingSlots",RPCMode.Others, pos, ids);
 	}

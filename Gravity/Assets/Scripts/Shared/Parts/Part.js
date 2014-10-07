@@ -30,13 +30,19 @@ class Part extends MonoBehaviour implements IPart
 		return partname;
 	}
 	function setName(name : String){
+		Ship.getShip(transform).unregisterPart(this,partname);
+		Ship.getShip(transform).registerPart(this,name);
 		partname = name;
 	}
 	
 	function LoadPart(data : Field){
+		Ship.getShip(transform).registerPart(this,partname);
+		
+		gameObject.SendMessage("setName",data.atField("Name").getString());
 	
 	}
 	function Unload(){
+		Ship.getShip(transform).unregisterPart(this,partname);
 	
 	}
 }

@@ -1,8 +1,0 @@
-<type>
-=1
-</type>
-<slot>
-=1
-</slot>
-<data>
-</data>

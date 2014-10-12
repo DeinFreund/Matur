@@ -75,7 +75,6 @@ class ReactionWheel extends Part
 		data.getField("Name").setString(partname);
 		
 		networkView.RPC("UnloadClient",RPCMode.Others);
-		Network.Destroy(networkView.viewID);
 		
 	}
 	

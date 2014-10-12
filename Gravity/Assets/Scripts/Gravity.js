@@ -10,24 +10,23 @@ private var last : float = 0;
 function Start () {
 	
 	objekte.Add(this.gameObject);
-	if (Network.isClient) {
-	}
+	if (Network.isClient) enabled = false;
 }
 
 function Update () {
 	if (Time.time-last<rate) return;
-	last = Time.time;
 	var o=this.gameObject;
 		for (var o2:GameObject in objekte){
 			if (o.transform.position != o2.transform.position)
 			{
-				o.transform.rigidbody.velocity+=((o2.transform.position-o.transform.position).normalized * Time.deltaTime * 
+				o.transform.rigidbody.velocity+=((o2.transform.position-o.transform.position).normalized * (Time.time - last) * 
 						CalcForce(1,o2.GetComponent(Gravity).mass, Vector3.Distance(o.transform.position,o2.transform.position)));
 				
 			}
 			//print (CalcForce(o.rigidbody.mass,o2.rigidbody.mass, Vector3.Distance(o.transform.position,o2.transform.position)));
 			
 		}	
+	last = Time.time;
 	
 }
 

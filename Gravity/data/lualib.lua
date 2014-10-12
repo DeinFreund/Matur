@@ -81,6 +81,11 @@ function addTorque(amt, axis)
 	_addTorque(amt,axis[1],axis[2],axis[3])
 end
 
+function setTorque(amt, axis)
+	_setTorque(amt*axis[1],amt*axis[2],amt*axis[3])
+end
+
+
 function abs(a)
 	if (a > 0) then
 		return a

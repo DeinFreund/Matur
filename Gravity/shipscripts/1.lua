@@ -99,7 +99,7 @@ function objectEnteredRadar(objectID)
 		
 	setSAS(dir,1)
 	radarObjects[objectID] = true
-	setTarget(objectID)
+	setTarget(getClosestObject())
 end
 
 function objectExitedRadar(objectID)
@@ -111,6 +111,8 @@ function getClosestObject()
 	bestID = -1
 	for k,v in ipairs(radarObjects) do
 		
+		--print( k .. ", " .. v .. ": " )
+		--print(getObjectDistance(k) .. " ")
 		if v and (bestDist < 0 or getObjectDistance(k) < bestDist) then
 			bestDist = getObjectDistance(k)
 			bestID = k
@@ -124,24 +126,26 @@ function test()
 end
 
 local lastShot = 0
+local launcherIndex = 0;
 
-function update(n)
+function update()
 	deltaTime = time - lastTime
 	lastTime = time
 	
-	if time - lastShot > 1.5 then
-		fire("Cannon")
+	if time - lastShot > 1 then
+		launcherIndex = launcherIndex + 1
+		if (launcherIndex % 2 == 0) then
+			fire("1")
+		else
+			fire("2")
+		end
 		lastShot = time
-	end
-	if not targetRotAxis  then
-		--resetSAS()
 	end
 	--rotation = {5}
 	--updateSAS()
 	--print(rotation[1]  .. " at " .. time)
 	--print(time  .. " 1")
 end
-time = 0
 --rotationAxis = {0,0,0}
 print("hi\n")
 

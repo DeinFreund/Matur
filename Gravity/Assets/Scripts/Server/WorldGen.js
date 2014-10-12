@@ -30,16 +30,10 @@ function Generate () {
 		var rot : Quaternion = Random.rotation;
 		var obj = Network.Instantiate(prefab,pos,rot,NetworkGroup.ENVIRONMENT);
 		obj.rigidbody.velocity = velocity;
-		obj.rigidbody.angularVelocity.x = Random.value * maxAngularVelocity;
-		obj.rigidbody.angularVelocity.y = Random.value * maxAngularVelocity;
-		obj.rigidbody.angularVelocity.z = Random.value * maxAngularVelocity;
+		obj.rigidbody.angularVelocity = Random.insideUnitSphere * maxAngularVelocity;
 	}
 	Network.Instantiate(Prefabs.getPlanetPrefab(),centre,Quaternion.identity,NetworkGroup.ENVIRONMENT);
 	Debug.Log("Generated " + asteroids + " asteroids.");
-}
-
-function Update () {
-
 }
 
 static function getOrbitalVelocity(go : GameObject) : Vector3{

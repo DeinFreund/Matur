@@ -63,7 +63,7 @@ class Engine extends Part
 	
 	function LoadPart(field : Field){
 		//Debug.Log(field.getId());
-		this.accel = field.atField("accel").getFloat();
+		setAccel( field.atField("accel").getFloat());
 		this.data = field;
 		shipRigidbody = Ship.getShip(transform).getGameObject().rigidbody;
 		super(field);
@@ -75,7 +75,6 @@ class Engine extends Part
 		data.getField("Name").setString(partname);
 		
 		networkView.RPC("UnloadClient",RPCMode.Others);
-		Network.Destroy(networkView.viewID);
 		
 	}
 	
@@ -88,7 +87,7 @@ class Engine extends Part
 		} 
 		this.accel = accel;
 		if (clientOnline){
-			networkView.RPC("confirmAccel",client,accel);
+			networkView.RPC("confirmAccel",RPCMode.OthersBuffered,accel);
 		}
 	}
 

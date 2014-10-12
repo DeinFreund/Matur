@@ -26,7 +26,7 @@ class ShipAI{
 		Debug.Log("(Ship " + ship.getShipId() + "): " + s);
 	}
 	
-	public function setTorque(amt : float, x : float,y : float, z: float, name : String){
+	/*public function setTorque(amt : float, x : float,y : float, z: float, name : String){
 		var v : Vector3 = new Vector3(x,y,z);
 		var target = Quaternion.AngleAxis(90f,Vector3(xx,yy,zz));
 		target = Quaternion.AngleAxis(90f,Vector3(0f,1f,0f));
@@ -57,7 +57,7 @@ class ShipAI{
 				rw.setRotAxis(v);
 			}
 		}
-	}
+	}*/
 	
 	public function addAngleAxis(w1 : float,x1 : float,y1 : float,z1 : float, w2 : float, x2 : float,y2 : float,z2 : float){
 		var q : Quaternion = Quaternion.AngleAxis(w1,Vector3(x1,y1,z1));
@@ -82,6 +82,7 @@ class ShipAI{
 		lua.RegisterFunction("_getObjectDirection",this,this.GetType().GetMethod("getObjectDirection"));
 		//lua.RegisterFunction("_torque",this,this.GetType().GetMethod("setTorque"));
 		lua.RegisterFunction("_addTorque",this,this.GetType().GetMethod("addTorque"));
+		lua.RegisterFunction("_setTorque",this,this.GetType().GetMethod("setTorque"));
 		lua.RegisterFunction("_getUp",this,this.GetType().GetMethod("getUp"));
 		lua.RegisterFunction("_getForward",this,this.GetType().GetMethod("getForward"));
 		lua.RegisterFunction("_getRight",this,this.GetType().GetMethod("getRight"));
@@ -160,7 +161,7 @@ class ShipAI{
 		var ls = ship.getParts(name);
 		
 		if (name == "") ls = ship.getParts(2);
-		log(ls.Count + " parts with name " + name);
+		//log(ls.Count + " parts with name " + name);
 		for (var part : Part in ls){
 			if (part.getType() == 2){
 				(part as Engine).setAccel(val);
@@ -213,16 +214,28 @@ class ShipAI{
 		}
 	}
 	function objectEnteredRadar(objectID : int){
-		lua.DoString("objectEnteredRadar(" + objectID +")");
+		try{
+			lua.DoString("objectEnteredRadar(" + objectID +")");
+		}catch(ex){
+			log("LuaException during objectEnteredRadar: " + ex);
+		}
+		
 	}
 	function objectExitedRadar(objectID : int){
-		lua.DoString("objectExitedRadar(" + objectID +")");
+		try{
+			lua.DoString("objectExitedRadar(" + objectID +")");
+		}catch(ex){
+			log("LuaException during objectExitedRadar: " + ex);
+		}
 	}
 	function executeString(string : String){
 		lua.DoString(string);
 	}
 	function addTorque(amt : float, x : float, y : float, z : float){
 		(ship.getGameObject().GetComponent(SAS) as SAS).addTorque(amt, new Vector3(x,y,z));
+	}
+	function setTorque(x : float, y : float, z : float){
+		(ship.getGameObject().GetComponent(SAS) as SAS).setPermanentTorque(new Vector3(x,y,z));
 	}
 	function getUp(){
 		setVector3("_getUpRet",ship.getTransform().up);

@@ -13,7 +13,7 @@ class GlobalVars extends MonoBehaviour{
 		
 		Debug.Log(field.atField("time").getValue());
 		startTime = field.atField("time").getFloat();
-		Debug.Log(startTime);
+		//Debug.Log(startTime);
 	}
 	
 	public static function getShipCounter() : int{

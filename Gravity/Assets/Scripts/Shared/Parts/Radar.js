@@ -54,9 +54,10 @@ class Radar extends Part
 	}
 	function Unload(){
 		
-		for (var i : int = 0; i < blobs.Count; i++){
-			blobs[i].gameObject.networkView.RPC("setRadarTex", client, false, false);
-		}
+		if (clientOnline)
+			for (var i : int = 0; i < blobs.Count; i++){
+				blobs[i].gameObject.networkView.RPC("setRadarTex", client, false, false, Ship.getShip(transform).networkView.viewID);
+			}
 		data.getField("Name").setString(partname);
 		networkView.RPC("UnloadClient",RPCMode.Others);
 		super();
@@ -80,7 +81,6 @@ class Radar extends Part
 	}
 	
 	function Capture(){
-		lastCapture = Time.time;
 		exposureCounter ++;
 		if (sensorData == null || sensorData.Length != blobs.Count){
 			sensorData = new float[blobs.Count];
@@ -94,7 +94,7 @@ class Radar extends Part
 				if (!blobAttr.ContainsKey(blobs[i].getId())) blobAttr[blobs[i].getId()] = new BlobAttr();
 				if (clientOnline) {
 					blobs[i].gameObject.networkView.RPC("setRadarTex", client, sensorData[i] > sensitivityThreshold, 
-							blobs[i].getId() == selectedBlob);
+							blobs[i].getId() == selectedBlob, Ship.getShip(transform).networkView.viewID);
 				}
 				if (sensorData[i] > sensitivityThreshold && !blobAttr[blobs[i].getId()].seenBefore){
 					blobAttr[blobs[i].getId()].seenBefore = true;
@@ -107,8 +107,9 @@ class Radar extends Part
 			}
 		}
 		for (i = 0; i < blobs.Count; i++){
-			sensorData[i] += blobs[i].getEmission() / Mathf.Pow(Vector3.Distance(transform.position,blobs[i].transform.position),2f);
+			sensorData[i] += blobs[i].getEmission() / Mathf.Pow(Vector3.Distance(transform.position,blobs[i].transform.position),2f) * (Time.time - lastCapture);
 		}
+		lastCapture = Time.time;
 	}
 	
 	function OnUserConnected(user : MinimalUser){

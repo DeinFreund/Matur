@@ -89,7 +89,8 @@ public class PartManager extends MonoBehaviour
 	
 	function unloadPart(go : GameObject){
 		if (go == null) return;
-		go.SendMessage("Unload",SendMessageOptions.DontRequireReceiver);
+		go.SendMessage("Unload",SendMessageOptions.RequireReceiver);
+		if (go!=null)Network.RemoveRPCs(go.networkView.viewID);
 		if (go!=null)Network.Destroy(go.networkView.viewID);
 	}
 	

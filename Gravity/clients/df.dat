@@ -47,6 +47,53 @@
 				</slot>
 				<data>
 					<parts>
+						<part>
+							<type>
+								=3
+							</type>
+							<slot>
+								=2
+							</slot>
+							<data>
+								<Name>
+									=1
+								</Name>
+								<cooldown>
+									=5
+								</cooldown>
+							</data>
+						</part>
+						<part>
+							<type>
+								=3
+							</type>
+							<slot>
+								=1
+							</slot>
+							<data>
+								<Name>
+									=2
+								</Name>
+								<cooldown>
+									=5
+								</cooldown>
+							</data>
+						</part>
+						<part>
+							<type>
+								=2
+							</type>
+							<slot>
+								=0
+							</slot>
+							<data>
+								<sensitivityThreshold>
+								</sensitivityThreshold>
+								<Name>
+									=Radar
+								</Name>
+							</data>
+						</part>
 					</parts>
 					<Name>
 						=Timon
@@ -64,45 +111,45 @@
 			=1
 		</shipId>
 		<health>
-			=20
+			=100
 		</health>
 		<maxhealth>
 			=100
 		</maxhealth>
 		<pos>
 			<x>
-				=9946.832
+				=74.33468
 			</x>
 			<y>
-				=-29.84236
+				=-29.99993
 			</y>
 			<z>
-				=7701.234
+				=71.00163
 			</z>
 		</pos>
 		<rot>
 			<x>
-				=-0.05435707
+				=-0.000850775
 			</x>
 			<y>
-				=0.001526391
+				=-2.186884E-05
 			</y>
 			<z>
-				=-0.001773793
+				=-8.990995E-06
 			</z>
 			<w>
-				=0.9985188
+				=0.9999996
 			</w>
 		</rot>
 		<vel>
 			<x>
-				=5.873577
+				=5.496058
 			</x>
 			<y>
-				=0.0001124808
+				=-2.862139E-05
 			</y>
 			<z>
-				=4.463355
+				=-5.86551
 			</z>
 		</vel>
 	</Ship>
@@ -110,33 +157,67 @@
 	</Files>
 	<hotkeys>
 		<F>
-			=setTarget(1)
+			<press>
+				=setTarget(1)
+			</press>
 		</F>
 		<G>
-			=test()
+			<press>
+				=test()
+			</press>
 		</G>
 		<D>
-			=addTorque(-1.0,getUp())
+			<press>
+				=addTorque(-1.0,getUp())
+			</press>
+			<Down>
+			</Down>
+			<Up>
+			</Up>
 		</D>
 		<X>
-			=setTarget(getClosestObject())
+			<press>
+				=setTarget(getClosestObject())
+			</press>
 		</X>
 		<Space>
-			=fire("")
+			<press>
+				=fire("")
+			</press>
 		</Space>
 		<W>
-			=addTorque(1.0,getRight())
+			<press>
+				=addTorque(1.0,getRight())
+			</press>
 		</W>
 		<A>
-			=addTorque(1.0,getUp())
+			<press>
+				=
+			</press>
+			<Down>
+				=setTorque(1.0,getUp())
+			</Down>
+			<Up>
+				=setTorque(0.0,getUp())
+			</Up>
 		</A>
 		<S>
-			=addTorque(-1.0,getRight())
+			<press>
+				=addTorque(-1.0,getRight())
+			</press>
+			<Down>
+			</Down>
+			<Up>
+			</Up>
 		</S>
 		<Q>
-			=addTorque(1.0,getForward())
+			<press>
+				=addTorque(1.0,getForward())
+			</press>
 		</Q>
 		<E>
-			=addTorque(-1.0,getForward())
+			<press>
+				=addTorque(-1.0,getForward())
+			</press>
 		</E>
 	</hotkeys>

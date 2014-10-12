@@ -112,7 +112,7 @@ function OnGUI(){
 			{
 				go.SendMessage("BeforeNetworkLoadedLevel", SendMessageOptions.DontRequireReceiver); 
 			}
-			
+			InitThings();
 			GetComponent(WorldGen).Generate();
 			GetComponent(AccountManager_S).LoadPlayers();
 			for (var go : GameObject in FindObjectsOfType(GameObject))
@@ -126,16 +126,18 @@ function OnGUI(){
 	}
 }
 
-
+function InitThings(){
+}
 
 @RPC
 function OnAuthenticated(){
 	Debug.Log("Sucessfully authenticated on Server");
 	authenticated = true;
+	InitThings();
 	for (var go : GameObject in FindObjectsOfType(GameObject))
-	{
-		go.SendMessage("OnNetworkLoadedLevel", SendMessageOptions.DontRequireReceiver); 
-	}
+		{
+			go.SendMessage("OnNetworkLoadedLevel", SendMessageOptions.DontRequireReceiver); 
+		}
 }
 
 

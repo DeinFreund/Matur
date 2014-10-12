@@ -2,15 +2,21 @@
 
 var time : float = 5.0;
 
-private var start : float;
 
 function Start () {
-	start = Time.time;
+	Invoke("Destroy",time);
 }
 
-function Update () {
-	if (Time.time - start > time) {
-		Network.RemoveRPCs(networkView.viewID);
-		Network.Destroy(networkView.viewID);
+function Destroy () {
+	Network.RemoveRPCs(networkView.viewID);
+	Network.Destroy(networkView.viewID);
+}
+
+@RPC
+function setParent(parent : NetworkViewID){
+	try{
+		transform.parent = networkView.Find(parent).transform;
+	}catch(ex){
+		//parent not found, doesn't matter
 	}
 }

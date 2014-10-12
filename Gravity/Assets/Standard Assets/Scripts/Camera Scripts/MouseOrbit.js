@@ -20,7 +20,7 @@ private var distanceMult : int = 1 ;
 @script AddComponentMenu("Camera-Control/Mouse Orbit")
 
 function Start () {
-	setTarget( GameObject.Find("Cube").transform);
+	setTarget( GameObject.Find("_ScriptManager").transform);
     var angles = transform.eulerAngles;
     x = angles.y;
     y = angles.x;

@@ -13,9 +13,7 @@ public class Ship extends MonoBehaviour{
 	private var partManager : PartManager;
 	private var data : Field;
 	private var main : boolean;
-	private var lastRPC : float;
 	private var lastAI : float;
-	private var rpcFreq : float = 5;
 	private var luaFreq : float = 5;
 	private var shipAI : ShipAI;
 	private var shipId : int;
@@ -55,7 +53,7 @@ public class Ship extends MonoBehaviour{
 			thisObj.rigidbody.velocity = data.getField("vel").getVector3();
 		}
 		
-		Debug.Log("shipid: " + data.getField("shipId"));
+		//Debug.Log("shipid: " + data.getField("shipId"));
 		if (!data.getField("shipId")){//if there ship doesn't have a unique Ship Id yet
 			data.addField("shipId").setInt(GlobalVars.getUniqueShipId());
 		}
@@ -98,7 +96,6 @@ public class Ship extends MonoBehaviour{
 	}
 	
 	function Update_S(){
-		if (Time.time - lastRPC > 1f / rpcFreq) UpdateRemote();
 		if (Time.time - lastAI > 1f / luaFreq) {
 			lastAI = Time.time;
 			shipAI.Update();
@@ -106,10 +103,6 @@ public class Ship extends MonoBehaviour{
 		
 	}
 	
-	function UpdateRemote(){
-		lastRPC = Time.time;
-		networkView.RPC("setVelocity", RPCMode.Others , rigidbody.velocity, rigidbody.angularVelocity);
-	}
 	
 	
 	function Unload(){
@@ -131,7 +124,7 @@ public class Ship extends MonoBehaviour{
 			if (!partNames.ContainsKey(name)){
 				partNames.Add(name,new List.<Part>());
 			}
-			Debug.Log("registered " + name + " of type " + part.getType());
+			//Debug.Log("registered " + name + " of type " + part.getType());
 			partNames[name].Add(part);
 		}
 		
@@ -225,7 +218,6 @@ public class Ship extends MonoBehaviour{
 		transform.position = s.position;
 		transform.rotation = s.rotation;
 		rigidbody.velocity = WorldGen.getOrbitalVelocity(gameObject);
-		Debug.LogWarning(rigidbody.velocity);
 	}
 	
 	

@@ -96,6 +96,7 @@
      <Compile Include="Assets\Scripts\Shared\FileManager.js" />
      <Compile Include="Assets\Scripts\Shared\Freeze.js" />
      <Compile Include="Assets\Scripts\Shared\LightFade.js" />
+     <Compile Include="Assets\Scripts\Shared\NetTransform.js" />
      <Compile Include="Assets\Scripts\Shared\NetworkGroup.js" />
      <Compile Include="Assets\Scripts\Shared\NetworkManager.js" />
      <Compile Include="Assets\Scripts\Shared\PartManager.js" />
@@ -109,6 +110,9 @@
      <Compile Include="Assets\Scripts\Shared\Parts\SelfDestruct.js" />
      <Compile Include="Assets\Scripts\Shared\Structs\MinimalUser.js" />
      <Compile Include="Assets\Scripts\Shared\Structs\SpawnRotation.js" />
+     <Compile Include="Assets\missileTests\moving.js" />
+     <Compile Include="Assets\missileTests\moving1.js" />
+     <Compile Include="Assets\missileTests\startSpeed.js" />
      <None Include="Assets\ImageEffects\ShaderDir\ColorBalance.shader" />
      <None Include="Assets\ImageEffects\AA Shaders\FXAA3Console.shader" />
      <None Include="Assets\ImageEffects\ShaderDir\MobileBloom.shader" />

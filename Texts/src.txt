@@ -1,0 +1,14 @@
+http://physics.stackexchange.com/
+
+http://en.wikipedia.org/wiki/
+
+http://unity3d.com/
+
+http://git-scm.com/
+
+Code für Indie Effects:
+http://forum.unity3d.com/threads/indieeffects-bringing-almost-aaa-quality-post-process-fx-to-unity-indie.198568/
+
+Code für MD5-Hash:
+http://wiki.unity3d.com/index.php?title=MD5
+

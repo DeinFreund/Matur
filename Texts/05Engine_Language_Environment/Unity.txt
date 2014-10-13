@@ -1,9 +1,9 @@
-Wir haben Unity als Plattform für dieses Spiel gewählt. Es bietet neben einer Engine direkt Skriptunterstützung.
+Es wurde die Unity 4 Engine als Plattform für dieses Spiel verwendet. Diese bietet neben einer Engine direkt Skriptunterstützung.
 
-Unity als Engine bietet Unterstützung für die meist genutzten Plattformen, wobei jedoch teilweise verschiedene APIs zur Verfügung stehen. 
-Als Renderer werden bei diesem Projekt Direct3D(Windows) und OpenGL(Linux, Mac) verwendet. Um davon unabhängig zu bleiben, gibt es in Unity die generalisierte Shader-Sprache ShaderLab.
-Daneben macht es von Nvidias PhysX Physics-Engine Gebrauch. Diese bietet parallelisierte Physikberechnungen, soweit dies von der Grafikkarte unterstützt wird. Sie kümmert sich um Interaktionen wie Zusammenstösse und die Beschleunigung von Raumschiffen.
+Unity als Engine bietet Unterstützung für die meist genutzten Plattformen, wobei aber teilweise verschiedene APIs genutzt werden müssen. Zwischen den gängigen Betriebssystemen(Windows, OSX) und Linux-Distributionen ist der Sourcecode jedoch portabel.
+Als Renderer werden bei diesem Projekt Direct3D(Windows) und OpenGL(Linux, OSX) verwendet. Um davon unabhängig zu bleiben, gibt es in Unity die generalisierte Shader-Sprache ShaderLab.
+Daneben macht die Unity-Engine von Nvidias PhysX Physik-Engine Gebrauch. Diese bietet parallelisierte Physikberechnungen, soweit dies von der Grafikkarte unterstützt wird. Sie kümmert sich um Interaktionen wie Zusammenstösse und die Beschleunigung von Raumschiffen. Gravitation muss jedoch getrennt davon berechnet werden.
 
 Unity bringt drei Skriptsprachen mit, UnityScript, C# und Boo, welche alle auf der OpenSource-.NET-Implementation Mono basieren. 
-Für dieses Projekt haben wir hauptsächlich UnityScript verwendet, die drei Sprachen sind sich jedoch sehr ähnlich.
-Als Entwicklungsumgebung liefert Unity MonoDevelop mit.
+Für dieses Projekt wurde soweit möglich UnityScript verwendet, die drei Sprachen sind sich sehr ähnlich.
+Als Entwicklungsumgebung liefert Unity MonoDevelop mit, welches über Syntax-Highlighting und spärliche Autovervollständigung verfügt. Es gibt jedoch einen passenden Emacs-Modus.

@@ -27,34 +27,33 @@ public class ShipClient extends MonoBehaviour
 	private var health : float;
 	private var maxHealth : float;
 	
-	static public function getShips() : List.<ShipClient>{
+	static public function getShips() : List.<ShipClient>{//returns all ships
 		return ships;
 	}
 	
 	private var emission : float = 100;
 	
-	
-	function Start(){
+
+	function Start(){//creates new list of ships if not existant 
 		if (ships==null) ships = new List.<ShipClient>();
 		
 		ships.Add(this);
 	}
 	
-	function OnNetworkLoadedLevel(){
+	function OnNetworkLoadedLevel(){//adds ship to game
 		if (Network.isClient){
 			gameObject.AddComponent(ShipServerRPCs);
 		}
 	}
 	
-	function Update(){
-		
+	function Update(){//check and returnNetwork Status
 		
 		if (Network.isClient) Update_C();
 		if (Network.isServer) enabled = false;
 		
 	}
 	
-	function Update_C(){
+	function Update_C(){//updates radar identifiers
 	
 		if (radarGuiTex) {
 			//might be replaced by flare for better performance
@@ -86,7 +85,7 @@ public class ShipClient extends MonoBehaviour
 	
 	
 	@RPC
-	function setRadarTex(val : boolean, selected : boolean, parent : NetworkViewID){
+	function setRadarTex(val : boolean, selected : boolean, parent : NetworkViewID){//updates Radar identifiers
 		if (val && (!radarGuiTex || selected != radarSelected) ) {
 			if (radarGuiTex) Destroy(radarGuiTex.gameObject);
 			if (selected) radarGuiTex = Instantiate(Prefabs.getRadarGuiSelectedTexture(),transform.position,transform.rotation);
@@ -109,7 +108,7 @@ public class ShipClient extends MonoBehaviour
 	}
 	
 	@RPC
-	function Enable(){
+	function Enable(){//enable Ship Control by Client
 		Debug.Log("clientsided controls on ship enabled");
 		Camera.main.GetComponent(MouseOrbit).setTarget(transform);
 		Camera.main.transform.parent = transform;
@@ -119,14 +118,14 @@ public class ShipClient extends MonoBehaviour
 	}
 	
 	@RPC
-	function setHealth(hp : float, maxhp : float){
+	function setHealth(hp : float, maxhp : float){//Sets current and MAX health
 		health = hp;
 		maxHealth = maxhp;
 		(GetComponent(Healthbar) as Healthbar).health = health/maxHealth;
 	}
 	
 	@RPC
-	function SetPartParent(childId : NetworkViewID){
+	function SetPartParent(childId : NetworkViewID){//updates child to parent
 		Debug.Log("set parent");
 		networkView.Find(childId).transform.parent = transform;
 	}

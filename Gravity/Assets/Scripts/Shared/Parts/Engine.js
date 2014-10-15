@@ -86,9 +86,7 @@ class Engine extends Part
 			return;
 		} 
 		this.accel = accel;
-		if (clientOnline){
-			networkView.RPC("confirmAccel",RPCMode.OthersBuffered,accel);
-		}
+		networkView.RPC("confirmAccel",RPCMode.OthersBuffered,accel);
 	}
 
 	//////////

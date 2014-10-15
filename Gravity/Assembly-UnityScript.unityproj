@@ -96,6 +96,7 @@
      <Compile Include="Assets\Scripts\Shared\FileManager.js" />
      <Compile Include="Assets\Scripts\Shared\Freeze.js" />
      <Compile Include="Assets\Scripts\Shared\LightFade.js" />
+     <Compile Include="Assets\Scripts\Shared\MissileEngine.js" />
      <Compile Include="Assets\Scripts\Shared\NetTransform.js" />
      <Compile Include="Assets\Scripts\Shared\NetworkGroup.js" />
      <Compile Include="Assets\Scripts\Shared\NetworkManager.js" />

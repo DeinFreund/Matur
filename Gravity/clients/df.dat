@@ -49,6 +49,21 @@
 					<parts>
 						<part>
 							<type>
+								=2
+							</type>
+							<slot>
+								=0
+							</slot>
+							<data>
+								<sensitivityThreshold>
+								</sensitivityThreshold>
+								<Name>
+									=Radar
+								</Name>
+							</data>
+						</part>
+						<part>
+							<type>
 								=3
 							</type>
 							<slot>
@@ -56,7 +71,7 @@
 							</slot>
 							<data>
 								<Name>
-									=1
+									=2
 								</Name>
 								<cooldown>
 									=5
@@ -72,31 +87,16 @@
 							</slot>
 							<data>
 								<Name>
-									=2
+									=1
 								</Name>
 								<cooldown>
 									=5
 								</cooldown>
 							</data>
 						</part>
-						<part>
-							<type>
-								=2
-							</type>
-							<slot>
-								=0
-							</slot>
-							<data>
-								<sensitivityThreshold>
-								</sensitivityThreshold>
-								<Name>
-									=Radar
-								</Name>
-							</data>
-						</part>
 					</parts>
 					<Name>
-						=Timon
+						=1
 					</Name>
 				</data>
 			</part>
@@ -111,45 +111,45 @@
 			=1
 		</shipId>
 		<health>
-			=100
+			=80
 		</health>
 		<maxhealth>
 			=100
 		</maxhealth>
 		<pos>
 			<x>
-				=74.33468
+				=56.68053
 			</x>
 			<y>
-				=-29.99993
+				=-29.96437
 			</y>
 			<z>
-				=71.00163
+				=90.42537
 			</z>
 		</pos>
 		<rot>
 			<x>
-				=-0.000850775
+				=-0.01376619
 			</x>
 			<y>
-				=-2.186884E-05
+				=0.0001677249
 			</y>
 			<z>
-				=-8.990995E-06
+				=0.0002220337
 			</z>
 			<w>
-				=0.9999996
+				=0.9999052
 			</w>
 		</rot>
 		<vel>
 			<x>
-				=5.496058
+				=5.089002
 			</x>
 			<y>
-				=-2.862139E-05
+				=0.001322733
 			</y>
 			<z>
-				=-5.86551
+				=-6.989861
 			</z>
 		</vel>
 	</Ship>
@@ -179,6 +179,12 @@
 			<press>
 				=setTarget(getClosestObject())
 			</press>
+			<Down>
+				=
+			</Down>
+			<Up>
+				=
+			</Up>
 		</X>
 		<Space>
 			<press>
@@ -189,6 +195,12 @@
 			<press>
 				=addTorque(1.0,getRight())
 			</press>
+			<Down>
+				=
+			</Down>
+			<Up>
+				=
+			</Up>
 		</W>
 		<A>
 			<press>
@@ -220,4 +232,26 @@
 				=addTorque(-1.0,getForward())
 			</press>
 		</E>
+		<Y>
+			<Press>
+				=setEngine("",0)
+			</Press>
+			<Down>
+				=
+			</Down>
+			<Up>
+				=
+			</Up>
+		</Y>
+		<C>
+			<Press>
+				=setEngine("",1)
+			</Press>
+			<Down>
+				=
+			</Down>
+			<Up>
+				=
+			</Up>
+		</C>
 	</hotkeys>

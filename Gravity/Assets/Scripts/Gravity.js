@@ -4,17 +4,22 @@ import System.Collections.Generic;
 public static var objekte : List. < GameObject > = new List.<GameObject>();
 
 var mass : float;
-private static var rate : float = 0.3;
+private static var rate : float = 0.25;
 private var last : float = 0;
 
 function Start () {
 	
+	if (Network.isClient) {
+		enabled = false;
+		return;
+	}
 	objekte.Add(this.gameObject);
-	if (Network.isClient) enabled = false;
+	
+	InvokeRepeating("Simulate",rate,rate);
+	last = Time.time;
 }
 
-function Update () {
-	if (Time.time-last<rate) return;
+function Simulate() {
 	var o=this.gameObject;
 		for (var o2:GameObject in objekte){
 			if (o.transform.position != o2.transform.position)

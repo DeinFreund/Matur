@@ -217,6 +217,8 @@ public class Ship extends MonoBehaviour{
 		var s = Spawn.getSpawn();
 		transform.position = s.position;
 		transform.rotation = s.rotation;
+		networkView.RPC("setHealth",owner.getNetworkPlayer(),health,maxHealth);
+		
 		rigidbody.velocity = WorldGen.getOrbitalVelocity(gameObject);
 	}
 	

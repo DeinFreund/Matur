@@ -3,7 +3,7 @@
 var target : Transform;
 var thrust : float = 100;
 var mode : int = 0;
-var minSpeed : float = 10;
+var minSpeed : float = 30;
 var damage : float = 10;
 var explosion : Transform;
 var sas : SAS;
@@ -30,7 +30,10 @@ static function newMissile(prefab : int, pos : Vector3, rot : Quaternion, veloci
 }
 
 function Start () {
-	if (Network.isClient) enabled = false;
+	if (Network.isClient) {
+		enabled = false;
+		return;
+	}
 	//Time.timeScale = 0.2;
 	startTime = Time.time;
 	sas = GetComponent(SAS);
@@ -48,6 +51,7 @@ function Start () {
 
 function Update () {
 
+	if(Network.isClient) return;
 	if (target!=null){
 		var toTarget : Vector3 = (target.position - transform.position).normalized;
 		var toMe : Vector3 = (transform.position-target.position).normalized;
@@ -125,27 +129,31 @@ function Update () {
 		adir = sas.getTargetDir();
 	}
 	if (sas.getError() > 40 && accelerating){
-		turnOffEngine();
+		turnOffEngineLocal();
 	}else if (sas.getError() <= 40 && !accelerating){
-		turnOnEngine();
+		turnOnEngineLocal();
 	}
 	if (accelerating && sas.getError() < 40)
 		//transform.rigidbody.AddForce(Mathf.Min(Time.deltaTime * thrust,maxAccel * rigidbody.mass) * adir ); 
 		transform.rigidbody.AddForce(Time.deltaTime * thrust * adir.normalized ); 
-	Debug.Log(Time.time + ": " + rigidbody.velocity.magnitude);
+	//Debug.Log(Time.time + ": " + rigidbody.velocity.magnitude);
 	if (Time.time - startTime > selfdTime){
 		OnCollisionEnter(null);
 	}
 }
 
-private function turnOnEngine(){
+
+private function turnOnEngineLocal(){
+	networkView.RPC("turnOnEngine",RPCMode.Others);
 	accelerating = true;
 	for (var component : ParticleEmitter in gameObject.GetComponentsInChildren(ParticleEmitter)){
 		component.minEmission*=1000;
 		component.maxEmission*=1000;
 	}
 }
-private function turnOffEngine(){
+
+private function turnOffEngineLocal(){
+	networkView.RPC("turnOffEngine",RPCMode.Others);
 	accelerating = false;
 	for (var component : ParticleEmitter in gameObject.GetComponentsInChildren(ParticleEmitter)){
 		component.minEmission*=0.001;
@@ -155,11 +163,15 @@ private function turnOffEngine(){
 
 function OnCollisionEnter(collision : Collision) {
 	if (!enabled || Network.isClient) return;
-	if (collision) collision.collider.attachedRigidbody.SendMessage("damage",damage,SendMessageOptions.DontRequireReceiver);
+	if (!collision) return;
+	var cparent : Transform = collision.collider.transform;
+	while(cparent.parent) cparent = cparent.parent;
+	cparent.SendMessage("damage",damage,SendMessageOptions.DontRequireReceiver);
 	var exp : Transform;
 	if (Network.isClient || Network.isServer)
 	{
-		exp = Network.Instantiate(explosion,transform.position,transform.rotation,0);exp.networkView.RPC("setParent",RPCMode.All,collision.collider.transform.networkView.viewID);
+		exp = Network.Instantiate(explosion,transform.position,transform.rotation,0);
+		exp.networkView.RPC("setParent",RPCMode.All,collision.collider.transform.networkView.viewID);
 		if (!enabled) return;
 		Network.RemoveRPCs(networkView.viewID);
 		

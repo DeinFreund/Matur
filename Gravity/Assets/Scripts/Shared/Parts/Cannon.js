@@ -67,7 +67,8 @@ class Cannon extends Part
 		}else{
 			trg = (radars[0] as Radar).getTarget();
 		}
-		Missile.newMissile(ammo,childSpawns[0].position,childSpawns[Random.Range(0,childSpawns.Count)].rotation,transform.forward*velocity+ship.rigidbody.velocity,trg);
+		var child = Random.Range(0,childSpawns.Count);
+		Missile.newMissile(ammo,childSpawns[child].position,childSpawns[child].rotation,transform.forward*velocity+ship.rigidbody.velocity,trg);
 		//Ship.newShip(owner,ammo,childSpawns[0].position, childSpawns[0].rotation);
 	}
 }

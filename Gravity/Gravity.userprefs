@@ -1,18 +1,21 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Server\Missile.js">
     <Files>
+      <File FileName="Assets\Scripts\Server\Missile.js" Line="163" Column="1" />
       <File FileName="Assets\Scripts\Client\HotKeyManager.js" Line="14" Column="47" />
-      <File FileName="Assets\Scripts\Gravity.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Shared\Parts\Engine.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Gravity.js" Line="7" Column="39" />
+      <File FileName="Assets\Scripts\Shared\Parts\Engine.js" Line="70" Column="3" />
       <File FileName="Assets\Scripts\Server\ShipAI.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Server\Missile.js" Line="5" Column="19" />
       <File FileName="Assets\Scripts\Shared\Parts\SelfDestruct.js" Line="1" Column="1" />
-      <File FileName="Assets\missileTests\startSpeed.js" Line="8" Column="1" />
-      <File FileName="Assets\missileTests\moving.js" Line="5" Column="20" />
-      <File FileName="Assets\missileTests\moving1.js" Line="9" Column="65" />
-      <File FileName="Assets\Scripts\Server\SAS.js" Line="58" Column="5" />
-      <File FileName="Assets\Scripts\Shared\PartManager.js" Line="82" Column="74" />
+      <File FileName="Assets\missileTests\startSpeed.js" Line="1" Column="1" />
+      <File FileName="Assets\missileTests\moving.js" Line="1" Column="1" />
+      <File FileName="Assets\missileTests\moving1.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Server\SAS.js" Line="28" Column="4" />
+      <File FileName="Assets\Scripts\Shared\PartManager.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Server\GlobalVars.js" Line="44" Column="17" />
+      <File FileName="Assets\Scripts\Shared\Parts\Cannon.js" Line="67" Column="9" />
+      <File FileName="Assets\Scripts\Shared\NetTransform.js" Line="44" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

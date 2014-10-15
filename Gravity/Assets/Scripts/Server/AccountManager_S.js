@@ -148,7 +148,13 @@ function LoadPlayer(name:String){
 	
 	Debug.Log("Creating player "+ name);
 	var path:String = getPlayerPath(name);
-	var data:Field = Field.newField(FileIO.ReadFile(path));
+	var data:Field;
+	try{
+		data = Field.newField(FileIO.ReadFile(path));
+		
+	}catch (ex){
+		Debug.LogError("Unable to load player's(" + (name) +") field: " + ex);
+	}
 	players.Add(new Player(data));
 	
 	
